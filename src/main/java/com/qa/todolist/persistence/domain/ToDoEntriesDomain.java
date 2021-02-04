@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -25,6 +26,9 @@ public class ToDoEntriesDomain {
 	@Basic
 	@Temporal(TemporalType.DATE)
 	private java.util.Date dueDate;
+	
+	@ManyToOne
+	private ToDoListsDomain myList;
 
 	//empty constructor
 	public ToDoEntriesDomain() {
@@ -32,11 +36,12 @@ public class ToDoEntriesDomain {
 	}
 
 	//constructor with all fields
-	public ToDoEntriesDomain(Long id, @NotNull String description, Date dueDate) {
+	public ToDoEntriesDomain(Long id, String description, Date dueDate, ToDoListsDomain myList) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.dueDate = dueDate;
+		this.myList = myList;
 	}
 
 	public Long getId() {
@@ -63,7 +68,15 @@ public class ToDoEntriesDomain {
 		this.dueDate = dueDate;
 	}
 
-	
+	public ToDoListsDomain getMyList() {
+		return myList;
+	}
+
+	public void setMyList(ToDoListsDomain myList) {
+		this.myList = myList;
+	}
+
+
 	
 
 }

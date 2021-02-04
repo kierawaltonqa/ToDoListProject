@@ -8,15 +8,15 @@ import javax.persistence.TemporalType;
 
 public class ToDoEntriesDTO {
 
-	// note: data passed as response does not differ from data taken in for entries
-	// still have DTO for convention purposes
-
 	private Long id;
 	private String description;
 	
 	@Basic
 	@Temporal(TemporalType.DATE)
 	private java.util.Date dueDate;
+	
+	//private ToDoListsDTO myList;
+	//causes a recursive error (because house shows cat list)
 
 	public ToDoEntriesDTO() {
 		super();
