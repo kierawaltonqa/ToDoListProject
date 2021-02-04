@@ -7,10 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.qa.springcats.persistence.domain.HouseDomain;
-import com.qa.springcats.persistence.dto.HouseDTO;
 import com.qa.todolist.persistence.domain.ToDoListsDomain;
-import com.qa.todolist.persistence.dto.ToDoEntriesDTO;
 import com.qa.todolist.persistence.dto.ToDoListsDTO;
 import com.qa.todolist.persistence.repos.ToDoListsRepo;
 
