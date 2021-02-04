@@ -1,5 +1,11 @@
 package com.qa.todolist.persistence.dto;
 
+import java.util.Date;
+
+import javax.persistence.Basic;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 public class ToDoEntriesDTO {
 
 	// note: data passed as response does not differ from data taken in for entries
@@ -7,13 +13,16 @@ public class ToDoEntriesDTO {
 
 	private Long id;
 	private String description;
-	private String dueDate;
+	
+	@Basic
+	@Temporal(TemporalType.DATE)
+	private java.util.Date dueDate;
 
 	public ToDoEntriesDTO() {
 		super();
 	}
 
-	public ToDoEntriesDTO(Long id, String description, String dueDate) {
+	public ToDoEntriesDTO(Long id, String description, Date dueDate) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -36,12 +45,13 @@ public class ToDoEntriesDTO {
 		this.description = description;
 	}
 
-	public String getDueDate() {
+	public java.util.Date getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(String dueDate) {
+	public void setDueDate(java.util.Date dueDate) {
 		this.dueDate = dueDate;
 	}
 
+	
 }

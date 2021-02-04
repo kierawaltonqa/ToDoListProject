@@ -1,9 +1,14 @@
 package com.qa.todolist.persistence.domain;
 
+import java.util.Date;
+
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,7 +22,9 @@ public class ToDoEntriesDomain {
 	private String description;
 	
 	@NotNull
-	private String dueDate;
+	@Basic
+	@Temporal(TemporalType.DATE)
+	private java.util.Date dueDate;
 
 	//empty constructor
 	public ToDoEntriesDomain() {
@@ -25,7 +32,7 @@ public class ToDoEntriesDomain {
 	}
 
 	//constructor with all fields
-	public ToDoEntriesDomain(Long id, @NotNull String description, @NotNull String dueDate) {
+	public ToDoEntriesDomain(Long id, @NotNull String description, Date dueDate) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -48,13 +55,14 @@ public class ToDoEntriesDomain {
 		this.description = description;
 	}
 
-	public String getDueDate() {
+	public java.util.Date getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(String dueDate) {
+	public void setDueDate(java.util.Date dueDate) {
 		this.dueDate = dueDate;
 	}
+
 	
 	
 
