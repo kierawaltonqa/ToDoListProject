@@ -36,6 +36,7 @@ public class ToDoEntriesServiceUnitTest {
 
 	// read all
 
+	// read one
 	@Test
 	public void readOne() {
 		Date date = new Date(2021 - 02 - 07);
@@ -47,13 +48,26 @@ public class ToDoEntriesServiceUnitTest {
 
 		Mockito.verify(this.mockedRepo, Mockito.times(1)).findById(1L);
 	}
-//		CatDomain test_cat = new CatDomain(1L, "Suki", 3, 2.5f, null);
-//		CatDTO test_dto = this.mockedMapper.map(test_cat, CatDTO.class);
-//		Mockito.when(this.mockedRepo.findById(test_cat.getId())).thenReturn(Optional.of(test_cat));
-//		CatDTO result = this.service.readOne(1L);
-//		Assertions.assertThat(result).isEqualTo(test_dto);
-//
-//		Mockito.verify(this.mockedRepo, Mockito.times(1)).findById(1L);
-//	}
+
+	// create
+	@Test
+	public void create() {
+		// resources
+		Date date = new Date(2021 - 02 - 07);
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
+		ToDoEntriesDTO test_dto = new ToDoEntriesDTO(1L, "task 1", date);
+		// rules
+		Mockito.when(this.mockedRepo.save(Mockito.any(ToDoEntriesDomain.class))).thenReturn(test_entry);
+		Mockito.when(this.mockedMapper.map(test_entry, ToDoEntriesDTO.class)).thenReturn(test_dto);
+		// actions
+		ToDoEntriesDTO result = this.service.create(test_entry);
+		// assertions
+		Assertions.assertThat(result).isNotNull();
+		Assertions.assertThat(result).isEqualTo(test_dto);
+		Assertions.assertThat(result).usingRecursiveComparison().isEqualTo(test_dto);
+
+		Mockito.verify(this.mockedMapper, Mockito.times(1)).map(test_entry, ToDoEntriesDTO.class);
+		Mockito.verify(this.mockedRepo, Mockito.times(1)).save(Mockito.any(ToDoEntriesDomain.class));
+	}
 
 }
