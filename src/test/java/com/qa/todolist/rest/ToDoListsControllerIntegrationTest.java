@@ -99,7 +99,6 @@ public class ToDoListsControllerIntegrationTest {
 		ToDoListsDomain contentBody = new ToDoListsDomain("Shopping List", null);
 		ToDoListsDTO expectedResult = mapToDTO(contentBody);
 		expectedResult.setId(3L);
-		// request
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
 				.request(HttpMethod.POST, "http://localhost:8080/lists/create").contentType(MediaType.APPLICATION_JSON)
 				.content(jsonifier.writeValueAsString(contentBody)).accept(MediaType.APPLICATION_JSON);
@@ -110,11 +109,15 @@ public class ToDoListsControllerIntegrationTest {
 
 	@Test
 	public void update() {
+		
 
 	}
 
 	@Test
-	public void delete() {
-
+	public void delete() throws Exception {
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
+				.request(HttpMethod.DELETE, "http://localhost:8080/lists/delete/" + 2);
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isNoContent();
+		this.mock.perform(mockRequest).andExpect(matchStatus);
 	}
 }
