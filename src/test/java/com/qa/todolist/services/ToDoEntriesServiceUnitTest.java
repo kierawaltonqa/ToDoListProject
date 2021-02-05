@@ -69,19 +69,21 @@ public class ToDoEntriesServiceUnitTest {
 
 	@Test
 	public void update() {
+		//resources
 		Date date = new Date(2021 - 02 - 07);
 		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
 		ToDoEntriesDomain updated_entry = new ToDoEntriesDomain(test_entry.getDescription(), test_entry.getDueDate(),
 				test_entry.getMyList());
 		updated_entry.setId(1L);
-		ToDoEntriesDTO test_dto = new ToDoEntriesDTO(1L, "task 1", date);
-
+		ToDoEntriesDTO test_dto = this.mockedMapper.map(updated_entry, ToDoEntriesDTO.class);
+		//rules
 		Mockito.when(this.mockedRepo.findById(1L)).thenReturn(Optional.of(
 				new ToDoEntriesDomain(test_entry.getDescription(), test_entry.getDueDate(), test_entry.getMyList())));
 		Mockito.when(this.mockedMapper.map(updated_entry, ToDoEntriesDTO.class)).thenReturn(test_dto);
-		
-		ToDoEntriesDTO result = this.service.update(1L, updated_entry);
-		
+		Mockito.when(this.mockedRepo.save(updated_entry)).thenReturn(updated_entry);
+		//actions
+		ToDoEntriesDTO result = this.service.update(1L, test_entry);
+		//assertions
 		Assertions.assertThat(result).isEqualTo(test_dto);
 		
 		Mockito.verify(this.mockedMapper, Mockito.times(1)).map(updated_entry, ToDoEntriesDTO.class);
