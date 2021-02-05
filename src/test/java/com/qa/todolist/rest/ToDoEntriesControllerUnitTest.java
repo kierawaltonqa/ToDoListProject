@@ -51,7 +51,6 @@ public class ToDoEntriesControllerUnitTest {
 		test_dtolist.add(test_dto);
 		test_dtolist.add(test_dto2);
 		//rules
-//		test_list.stream().map(this::mapToDTO).collect(Collectors.toList());
 		Mockito.when(service.readAll()).thenReturn(test_dtolist);
 		//results
 		ResponseEntity <List<ToDoEntriesDTO>> result = this.controller.readAll();
