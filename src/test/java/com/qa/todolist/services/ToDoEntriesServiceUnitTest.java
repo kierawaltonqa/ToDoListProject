@@ -1,6 +1,8 @@
 package com.qa.todolist.services;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
@@ -27,13 +29,29 @@ public class ToDoEntriesServiceUnitTest {
 	@Autowired
 	ToDoEntriesService service;
 
-//	private final Date date = new Date(2021-02-07);
-//	SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-//	String stringDate= DateFor.format(date);
-
 	// CRUD TESTS
 
-	// read all
+	@Test
+	public void readAll() {
+		//resources
+//		Date date = new Date(2021 - 02 - 07);
+//		Date date2 = new Date(2021 - 03 - 07);
+//		List<ToDoEntriesDomain> test_list = new ArrayList<>();
+//		List<ToDoEntriesDTO> test_dto = new ArrayList<>();
+//		ToDoEntriesDomain test_entry1 = new ToDoEntriesDomain(1L, "task 1", date, null);
+//		ToDoEntriesDomain test_entry2 = new ToDoEntriesDomain(2L, "task 2", date2, null);
+//		test_list.add(test_entry1);
+//		test_list.add(test_entry2);
+//		ToDoEntriesDTO test_dto1 = this.mockedMapper.map(test_entry1, ToDoEntriesDTO.class);
+//		ToDoEntriesDTO test_dto2 = this.mockedMapper.map(test_entry2, ToDoEntriesDTO.class);
+//		test_dto.add(test_dto1);
+//		test_dto.add(test_dto2);
+//		//rules
+//		Mockito.when(this.mockedRepo.findAll()).thenReturn(test_list);
+//		Mockito.when(this.mockedMapper.map(test_list, ToDoEntriesDTO.class)).thenReturn();
+		//actions
+		
+	}
 
 	@Test
 	public void readOne() {
