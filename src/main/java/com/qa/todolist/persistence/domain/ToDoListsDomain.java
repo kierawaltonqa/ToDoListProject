@@ -39,6 +39,13 @@ public class ToDoListsDomain {
 		this.toDoList = toDoList;
 	}
 
+	// constructor without id for testing purposes
+	public ToDoListsDomain(String title, List<ToDoEntriesDomain> toDoList) {
+		super();
+		this.title = title;
+		this.toDoList = toDoList;
+	}
+
 	public Long getId() {
 		return id;
 	}
