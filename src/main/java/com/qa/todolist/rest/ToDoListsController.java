@@ -39,7 +39,7 @@ public class ToDoListsController {
 	// GET - read by id
 	@GetMapping("read/{id}")
 	public ResponseEntity<ToDoListsDTO> readOne(@PathVariable("id") Long id) {
-		return ResponseEntity.ok(this.service.readOne(id));
+		return new ResponseEntity<ToDoListsDTO>(this.service.readOne(id), HttpStatus.OK);
 	}
 
 	// POST

@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
@@ -20,7 +21,9 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qa.todolist.persistence.domain.ToDoListsDomain;
 import com.qa.todolist.persistence.dto.ToDoEntriesDTO;
 import com.qa.todolist.persistence.dto.ToDoListsDTO;
 
@@ -37,6 +40,10 @@ public class ToDoListsControllerIntegrationTest {
 	private ModelMapper mapper;
 	@Autowired
 	private ObjectMapper jsonifier;
+
+	private ToDoListsDTO mapToDTO(ToDoListsDomain model) {
+		return this.mapper.map(model, ToDoListsDTO.class);
+	}
 
 	private final int ID = 1;
 
@@ -70,17 +77,35 @@ public class ToDoListsControllerIntegrationTest {
 		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
 		// action
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
-
 	}
 
 	@Test
-	public void readOne() {
-
+	public void readOne() throws Exception {
+		// resources
+		entryList.add(entry3);
+		ToDoListsDTO expectedResult = new ToDoListsDTO(1L, "General Tasks", entryList);
+		// request
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET,
+				"http://localhost:8080/lists/read" + ID);
+		// expectations
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
+		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
+		// action
+		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
 	}
 
 	@Test
-	public void create() {
-
+	public void create() throws Exception {
+		ToDoListsDomain contentBody = new ToDoListsDomain("Shopping List", null);
+		ToDoListsDTO expectedResult = mapToDTO(contentBody);
+		expectedResult.setId(3L);
+		// request
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
+				.request(HttpMethod.POST, "http://localhost:8080/lists/create").contentType(MediaType.APPLICATION_JSON)
+				.content(jsonifier.writeValueAsString(contentBody)).accept(MediaType.APPLICATION_JSON);
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isCreated();
+		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
+		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
 	}
 
 	@Test
