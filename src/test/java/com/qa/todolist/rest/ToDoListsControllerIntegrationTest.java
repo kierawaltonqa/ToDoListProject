@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qa.todolist.persistence.domain.ToDoEntriesDomain;
 import com.qa.todolist.persistence.domain.ToDoListsDomain;
 import com.qa.todolist.persistence.dto.ToDoEntriesDTO;
 import com.qa.todolist.persistence.dto.ToDoListsDTO;
@@ -45,18 +46,18 @@ public class ToDoListsControllerIntegrationTest {
 		return this.mapper.map(model, ToDoListsDTO.class);
 	}
 
-	private final int ID = 1;
+	private final int ID = 2;
 
 	private final List<ToDoEntriesDTO> entryList = new ArrayList<>();
 	private final List<ToDoEntriesDTO> entryList2 = new ArrayList<>();
-
+	
 	Date date1 = Date.valueOf("2021-02-06");
 	Date date2 = Date.valueOf("2021-02-12");
 	Date date3 = Date.valueOf("2021-02-07");
 
 	private final ToDoEntriesDTO entry1 = new ToDoEntriesDTO(1L, "create back end", date1);
 	private final ToDoEntriesDTO entry2 = new ToDoEntriesDTO(2L, "testing for back end", date2);
-	private final ToDoEntriesDTO entry3 = new ToDoEntriesDTO(3L, "buy dad a birthday present", date3);
+	private final ToDoEntriesDTO entry3 = new ToDoEntriesDTO(3L, "buy dad a birthday present", date3);	
 
 	@Test
 	public void readAll() throws Exception {
@@ -82,11 +83,12 @@ public class ToDoListsControllerIntegrationTest {
 	@Test
 	public void readOne() throws Exception {
 		// resources
-		entryList.add(entry3);
-		ToDoListsDTO expectedResult = new ToDoListsDTO(1L, "General Tasks", entryList);
+		entryList2.add(entry1);
+		entryList2.add(entry2);
+		ToDoListsDTO expectedResult = new ToDoListsDTO(2L, "QA Project 2 tasks", entryList2);
 		// request
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET,
-				"http://localhost:8080/lists/read" + ID);
+				"http://localhost:8080/lists/read/" + ID);
 		// expectations
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
 		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
@@ -109,8 +111,10 @@ public class ToDoListsControllerIntegrationTest {
 
 	@Test
 	public void update() {
+		// resources
 		
-
+		ToDoListsDomain contentBody = new ToDoListsDomain();
+		
 	}
 
 	@Test
