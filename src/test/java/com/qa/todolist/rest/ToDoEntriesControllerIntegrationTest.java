@@ -42,6 +42,8 @@ public class ToDoEntriesControllerIntegrationTest {
 	Date date1 = Date.valueOf("2021-02-06");
 	Date date2 = Date.valueOf("2021-02-12");
 	Date date3 = Date.valueOf("2021-02-07");
+	
+//	Date date4 = Date.valueOf("2021-02-06T00:00:00.000+00:00");
 
 	private final int ID = 1;
 
@@ -89,6 +91,7 @@ public class ToDoEntriesControllerIntegrationTest {
 		ToDoEntriesDomain contentBody = new ToDoEntriesDomain("complete front end", date1, null);
 		ToDoEntriesDTO expectedResult = mapToDTO(contentBody);
 		expectedResult.setId(4L);
+		//request
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
 				.request(HttpMethod.POST, "http://localhost:8080/entries/create").contentType(MediaType.APPLICATION_JSON)
 				.content(jsonifier.writeValueAsString(contentBody)).accept(MediaType.APPLICATION_JSON);
