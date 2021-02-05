@@ -5,7 +5,6 @@ VALUES
 
 INSERT INTO TO_DO_ENTRIES_DOMAIN (DESCRIPTION,DUE_DATE,MY_LIST_ID)
 VALUES
-('create back end','2021-02-06',3),
-('testing for back end','2021-02-08',3),
-('buy dad a birthday present','2021-02-07',1),
-('send dbs check back to qa','2021-02-06',1);
+('create back end','2021-02-06',2),
+('testing for back end','2021-02-12',2),
+('buy dad a birthday present','2021-02-07',1);
