@@ -19,6 +19,13 @@ public class ToDoListsDTO {
 		this.title = title;
 		this.toDoList = toDoList;
 	}
+	
+	//generated for testing purposes
+	public ToDoListsDTO(Long id, String title) {
+		super();
+		this.id = id;
+		this.title = title;
+	}
 
 	public Long getId() {
 		return id;
