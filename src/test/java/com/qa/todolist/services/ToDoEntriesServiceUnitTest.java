@@ -1,7 +1,6 @@
 package com.qa.todolist.services;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
@@ -36,7 +35,6 @@ public class ToDoEntriesServiceUnitTest {
 
 	// read all
 
-	// read one
 	@Test
 	public void readOne() {
 		Date date = new Date(2021 - 02 - 07);
@@ -49,7 +47,6 @@ public class ToDoEntriesServiceUnitTest {
 		Mockito.verify(this.mockedRepo, Mockito.times(1)).findById(1L);
 	}
 
-	// create
 	@Test
 	public void create() {
 		// resources
@@ -70,4 +67,38 @@ public class ToDoEntriesServiceUnitTest {
 		Mockito.verify(this.mockedRepo, Mockito.times(1)).save(Mockito.any(ToDoEntriesDomain.class));
 	}
 
+	@Test
+	public void update() {
+		Date date = new Date(2021 - 02 - 07);
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
+		ToDoEntriesDomain updated_entry = new ToDoEntriesDomain(test_entry.getDescription(), test_entry.getDueDate(),
+				test_entry.getMyList());
+		updated_entry.setId(1L);
+		ToDoEntriesDTO test_dto = new ToDoEntriesDTO(1L, "task 1", date);
+
+		Mockito.when(this.mockedRepo.findById(1L)).thenReturn(Optional.of(
+				new ToDoEntriesDomain(test_entry.getDescription(), test_entry.getDueDate(), test_entry.getMyList())));
+		Mockito.when(this.mockedMapper.map(updated_entry, ToDoEntriesDTO.class)).thenReturn(test_dto);
+		
+		ToDoEntriesDTO result = this.service.update(1L, updated_entry);
+		
+		Assertions.assertThat(result).isEqualTo(test_dto);
+		
+		Mockito.verify(this.mockedMapper, Mockito.times(1)).map(updated_entry, ToDoEntriesDTO.class);
+		Mockito.verify(this.mockedRepo, Mockito.times(1)).save(Mockito.any(ToDoEntriesDomain.class));
+	}
+
+	@Test
+	public void delete() {
+		Date date = new Date(2021 - 02 - 07);
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
+		ToDoEntriesDTO test_dto = new ToDoEntriesDTO(1L, "task 1", date);
+
+		Mockito.when(this.mockedRepo.existsById(test_entry.getId())).thenReturn(true);
+
+		Assertions.assertThat(this.service.delete(test_dto.getId())).isEqualTo(!true);
+
+		Mockito.verify(this.mockedRepo, Mockito.times(1)).deleteById(test_entry.getId());
+		Mockito.verify(this.mockedRepo, Mockito.times(1)).existsById(test_entry.getId());
+	}
 }

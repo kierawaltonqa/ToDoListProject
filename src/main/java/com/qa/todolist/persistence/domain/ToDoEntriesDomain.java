@@ -44,6 +44,14 @@ public class ToDoEntriesDomain {
 		this.myList = myList;
 	}
 
+	//constructor without id (for testing purposes)
+	public ToDoEntriesDomain(String description, Date dueDate, ToDoListsDomain myList) {
+		super();
+		this.description = description;
+		this.dueDate = dueDate;
+		this.myList = myList;
+	}
+
 	public Long getId() {
 		return id;
 	}
