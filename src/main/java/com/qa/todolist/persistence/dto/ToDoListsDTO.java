@@ -19,7 +19,7 @@ public class ToDoListsDTO {
 		this.title = title;
 		this.toDoList = toDoList;
 	}
-	
+	 
 
 	public Long getId() {
 		return id;

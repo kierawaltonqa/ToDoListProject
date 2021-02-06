@@ -1,4 +1,4 @@
-package com.qa.todolist.persistence.domain;
+package com.qa.todolist.persistence.dto;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -9,15 +9,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class ToDoListsDomainUnitTests {
+public class ToDoListsDTOUnitTest {
 
-	private ToDoListsDomain list = new ToDoListsDomain(1L,"list 1", null);
-	private ToDoListsDomain list2 = new ToDoListsDomain(2L,"list 2", null);
-	private ToDoListsDomain list3 = new ToDoListsDomain(2L,"list 2", null);
+	//same as domain, except no constructor without id
 	
-	private final List<ToDoEntriesDomain> entryList = new ArrayList<>();
+
+	private ToDoListsDTO list = new ToDoListsDTO(1L,"list 1", null);
+	private ToDoListsDTO list2 = new ToDoListsDTO(2L,"list 2", null);
+	private ToDoListsDTO list3 = new ToDoListsDTO(2L,"list 2", null);
+	
+	private final List<ToDoEntriesDTO> entryList = new ArrayList<>();
 	private final Date date1 = Date.valueOf("2021-02-06");
-	private final ToDoEntriesDomain entry1 = new ToDoEntriesDomain(1L, "create back end", date1, null);
+	private final ToDoEntriesDTO entry1 = new ToDoEntriesDTO(1L, "create back end", date1);
 	
 	@Test
 	public void settersTest() {
@@ -88,14 +91,5 @@ public class ToDoListsDomainUnitTests {
 		Assertions.assertThat(list2.getToDoList()).isNotNull();
 		Assertions.assertThat(list2.getToDoList()).isNotEqualTo(list3.getToDoList());
 	}
-	@Test
-	public void constructorWithoutId() {
-		ToDoListsDomain list4 = new ToDoListsDomain("List 4", null);
-		Assertions.assertThat(list4.getId()).isNull();
-		Assertions.assertThat(list4.getTitle()).isNotNull();
-		Assertions.assertThat(list4.getTitle()).isEqualTo("List 4");
-		Assertions.assertThat(list4.getToDoList()).isNull();
-	}
-	
 	
 }
