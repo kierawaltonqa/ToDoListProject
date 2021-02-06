@@ -92,7 +92,10 @@ public class ToDoListsServiceUnitTest {
 
 	@Test
 	public void delete() {
-
+		Long id = 1L;
+		Mockito.when(this.mockedRepo.existsById(id)).thenReturn(false);
+		Assertions.assertThat(this.service.delete(id)).isTrue();
+		Mockito.verify(this.mockedRepo, Mockito.times(1)).existsById(id);
 	}
 
 }
