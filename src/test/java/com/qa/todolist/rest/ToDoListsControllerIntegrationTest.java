@@ -21,9 +21,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qa.todolist.persistence.domain.ToDoEntriesDomain;
 import com.qa.todolist.persistence.domain.ToDoListsDomain;
 import com.qa.todolist.persistence.dto.ToDoEntriesDTO;
 import com.qa.todolist.persistence.dto.ToDoListsDTO;
