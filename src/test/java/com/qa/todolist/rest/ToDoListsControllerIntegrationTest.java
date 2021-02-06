@@ -110,11 +110,21 @@ public class ToDoListsControllerIntegrationTest {
 	}
 
 	@Test
-	public void update() {
+	public void update() throws Exception {
 		// resources
-		
-		ToDoListsDomain contentBody = new ToDoListsDomain();
-		
+		ToDoListsDomain contentBody = new ToDoListsDomain(1L,"list 1", null);
+		ToDoListsDomain updatedBody = new ToDoListsDomain(contentBody.getTitle(), contentBody.getToDoList());
+		updatedBody.setId(1L);
+		ToDoListsDTO expectedResult = mapToDTO(updatedBody);
+		//request
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
+				.request(HttpMethod.PUT, "http://localhost:8080/lists/update/" + 1).contentType(MediaType.APPLICATION_JSON)
+				.content(jsonifier.writeValueAsString(contentBody)).accept(MediaType.APPLICATION_JSON);
+		//expectations
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isAccepted();
+		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
+		//action
+		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
 	}
 
 	@Test
