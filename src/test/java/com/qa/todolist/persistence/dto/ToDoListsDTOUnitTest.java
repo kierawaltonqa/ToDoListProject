@@ -33,7 +33,7 @@ public class ToDoListsDTOUnitTest {
 		Assertions.assertThat(list.getTitle()).isNotNull();
 		Assertions.assertThat(list.getToDoList()).isNull();
 	}
-	@Test
+	@Test 
 	public void equalsWithNull() {
 		Assertions.assertThat(list).isNotNull();
 	}
@@ -91,5 +91,5 @@ public class ToDoListsDTOUnitTest {
 		Assertions.assertThat(list2.getToDoList()).isNotNull();
 		Assertions.assertThat(list2.getToDoList()).isNotEqualTo(list3.getToDoList());
 	}
-	
+	//testing at 91% 
 }

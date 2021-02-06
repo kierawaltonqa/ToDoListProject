@@ -87,7 +87,7 @@ public class ToDoListsDomainUnitTests {
 		list2.setToDoList(entryList);
 		Assertions.assertThat(list2.getToDoList()).isNotNull();
 		Assertions.assertThat(list2.getToDoList()).isNotEqualTo(list3.getToDoList());
-	}
+	} 
 	@Test
 	public void constructorWithoutId() {
 		ToDoListsDomain list4 = new ToDoListsDomain("List 4", null);
