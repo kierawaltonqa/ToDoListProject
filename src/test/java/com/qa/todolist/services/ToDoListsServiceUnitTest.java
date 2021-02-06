@@ -1,5 +1,6 @@
 package com.qa.todolist.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
@@ -25,6 +26,20 @@ public class ToDoListsServiceUnitTest {
 
 	@Autowired
 	ToDoListsService service;
+	
+	@Test
+	public void readAll() {
+		Long id = 1L;
+		ToDoListsDomain test_list = new ToDoListsDomain(1L, "list 1", null);
+		test_list.setId(id);
+		List<ToDoListsDomain> lists = this.mockedRepo.findAll(); 
+		ToDoListsDTO test_dto = this.mockedMapper.map(lists, ToDoListsDTO.class);
+		Mockito.when(this.mockedRepo.findAll()).thenReturn(lists);
+		Mockito.when(this.mockedMapper.map(lists, ToDoListsDTO.class)).thenReturn(test_dto);
+		Assertions.assertThat(lists).isNotNull();
+		Assertions.assertThat(this.service.readAll()).isEqualTo(lists);
+		Mockito.verify(this.mockedRepo, Mockito.times(2)).findAll();
+	}
 
 	@Test
 	public void readOne() {
