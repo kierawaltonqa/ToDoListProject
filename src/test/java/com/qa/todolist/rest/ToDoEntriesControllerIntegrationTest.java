@@ -1,10 +1,15 @@
 package com.qa.todolist.rest;
 
 import java.sql.Date;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.CalendarConversion;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -43,8 +48,6 @@ public class ToDoEntriesControllerIntegrationTest {
 	Date date2 = Date.valueOf("2021-02-12");
 	Date date3 = Date.valueOf("2021-02-07");
 	
-//	Date date4 = Date.valueOf("2021-02-06T00:00:00.000+00:00");
-
 	private final int ID = 1;
 
 	private final ToDoEntriesDTO entry1 = new ToDoEntriesDTO(1L, "create back end", date1);
