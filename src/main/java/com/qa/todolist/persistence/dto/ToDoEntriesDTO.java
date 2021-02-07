@@ -10,23 +10,26 @@ public class ToDoEntriesDTO {
 
 	private Long id;
 	private String description;
-	
+
 	@Basic
 	@Temporal(TemporalType.DATE)
 	private java.util.Date dueDate;
-	
-	//private ToDoListsDTO myList;
-	//causes a recursive error (because house shows cat list)
+
+	private boolean completed;
+
+	// private ToDoListsDTO myList;
+	// causes a recursive error (because house shows cat list)
 
 	public ToDoEntriesDTO() {
 		super();
 	}
 
-	public ToDoEntriesDTO(Long id, String description, Date dueDate) {
+	public ToDoEntriesDTO(Long id, String description, Date dueDate, boolean completed) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.dueDate = dueDate;
+		this.completed = completed;
 	}
 
 	public Long getId() {
@@ -53,5 +56,12 @@ public class ToDoEntriesDTO {
 		this.dueDate = dueDate;
 	}
 
-	
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+
 }

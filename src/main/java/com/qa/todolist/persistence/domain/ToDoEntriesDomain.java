@@ -14,41 +14,45 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class ToDoEntriesDomain {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
 	private String description;
-	
+
 	@NotNull
 	@Basic
 	@Temporal(TemporalType.DATE)
 	private java.util.Date dueDate;
-	
+
+	private boolean completed;
+
 	@ManyToOne
 	private ToDoListsDomain myList;
 
-	//empty constructor
+	// empty constructor
 	public ToDoEntriesDomain() {
 		super();
 	}
 
-	//constructor with all fields
-	public ToDoEntriesDomain(Long id, String description, Date dueDate, ToDoListsDomain myList) {
+	// constructor with all fields
+	public ToDoEntriesDomain(Long id, String description, Date dueDate, boolean completed, ToDoListsDomain myList) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.dueDate = dueDate;
+		this.completed = completed;
 		this.myList = myList;
 	}
 
-	//constructor without id (for testing purposes)
-	public ToDoEntriesDomain(String description, Date dueDate, ToDoListsDomain myList) {
+	// constructor without id (for testing purposes)
+	public ToDoEntriesDomain(String description, Date dueDate, boolean completed, ToDoListsDomain myList) {
 		super();
 		this.description = description;
 		this.dueDate = dueDate;
+		this.completed = completed;
 		this.myList = myList;
 	}
 
@@ -76,6 +80,14 @@ public class ToDoEntriesDomain {
 		this.dueDate = dueDate;
 	}
 
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+
 	public ToDoListsDomain getMyList() {
 		return myList;
 	}
@@ -84,7 +96,5 @@ public class ToDoEntriesDomain {
 		this.myList = myList;
 	}
 
-
 	
-
 }
