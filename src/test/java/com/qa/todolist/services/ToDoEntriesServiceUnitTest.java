@@ -33,7 +33,7 @@ public class ToDoEntriesServiceUnitTest {
 
 	@Test
 	public void readAll() {
-		//resources
+		// resources
 //		Date date = new Date(2021 - 02 - 07);
 //		Date date2 = new Date(2021 - 03 - 07);
 //		List<ToDoEntriesDomain> test_list = new ArrayList<>();
@@ -49,14 +49,14 @@ public class ToDoEntriesServiceUnitTest {
 //		//rules
 //		Mockito.when(this.mockedRepo.findAll()).thenReturn(test_list);
 //		Mockito.when(this.mockedMapper.map(test_list, ToDoEntriesDTO.class)).thenReturn();
-		//actions
-		
+		// actions
+
 	}
 
 	@Test
 	public void readOne() {
 		Date date = new Date(2021 - 02 - 07);
-		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, true, null);
 		ToDoEntriesDTO test_dto = this.mockedMapper.map(test_entry, ToDoEntriesDTO.class);
 		Mockito.when(this.mockedRepo.findById(test_entry.getId())).thenReturn(Optional.of(test_entry));
 		ToDoEntriesDTO result = this.service.readOne(1L);
@@ -69,8 +69,8 @@ public class ToDoEntriesServiceUnitTest {
 	public void create() {
 		// resources
 		Date date = new Date(2021 - 02 - 07);
-		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
-		ToDoEntriesDTO test_dto = new ToDoEntriesDTO(1L, "task 1", date);
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, true, null);
+		ToDoEntriesDTO test_dto = new ToDoEntriesDTO(1L, "task 1", date, true);
 		// rules
 		Mockito.when(this.mockedRepo.save(Mockito.any(ToDoEntriesDomain.class))).thenReturn(test_entry);
 		Mockito.when(this.mockedMapper.map(test_entry, ToDoEntriesDTO.class)).thenReturn(test_dto);
@@ -87,23 +87,24 @@ public class ToDoEntriesServiceUnitTest {
 
 	@Test
 	public void update() {
-		//resources
+		// resources
 		Date date = new Date(2021 - 02 - 07);
-		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, true, null);
 		ToDoEntriesDomain updated_entry = new ToDoEntriesDomain(test_entry.getDescription(), test_entry.getDueDate(),
-				test_entry.getMyList());
+				test_entry.isCompleted(), test_entry.getMyList());
 		updated_entry.setId(1L);
 		ToDoEntriesDTO test_dto = this.mockedMapper.map(updated_entry, ToDoEntriesDTO.class);
-		//rules
-		Mockito.when(this.mockedRepo.findById(1L)).thenReturn(Optional.of(
-				new ToDoEntriesDomain(test_entry.getDescription(), test_entry.getDueDate(), test_entry.getMyList())));
+		// rules
+		Mockito.when(this.mockedRepo.findById(1L))
+				.thenReturn(Optional.of(new ToDoEntriesDomain(test_entry.getDescription(), test_entry.getDueDate(),
+						test_entry.isCompleted(), test_entry.getMyList())));
 		Mockito.when(this.mockedMapper.map(updated_entry, ToDoEntriesDTO.class)).thenReturn(test_dto);
 		Mockito.when(this.mockedRepo.save(updated_entry)).thenReturn(updated_entry);
-		//actions
+		// actions
 		ToDoEntriesDTO result = this.service.update(1L, test_entry);
-		//assertions
+		// assertions
 		Assertions.assertThat(result).isEqualTo(test_dto);
-		
+
 		Mockito.verify(this.mockedMapper, Mockito.times(1)).map(updated_entry, ToDoEntriesDTO.class);
 		Mockito.verify(this.mockedRepo, Mockito.times(1)).save(Mockito.any(ToDoEntriesDomain.class));
 	}
@@ -111,8 +112,8 @@ public class ToDoEntriesServiceUnitTest {
 	@Test
 	public void delete() {
 		Date date = new Date(2021 - 02 - 07);
-		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
-		ToDoEntriesDTO test_dto = new ToDoEntriesDTO(1L, "task 1", date);
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, true, null);
+		ToDoEntriesDTO test_dto = new ToDoEntriesDTO(1L, "task 1", date, true);
 
 		Mockito.when(this.mockedRepo.existsById(test_entry.getId())).thenReturn(true);
 

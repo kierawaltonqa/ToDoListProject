@@ -44,7 +44,7 @@ public class ToDoListsControllerUnitTest {
 		ToDoListsDomain item2 = new ToDoListsDomain(2L, "list 2", null);
 		ToDoListsDTO dto1 = mapToDTO(item1);
 		ToDoListsDTO dto2 = mapToDTO(item2);
-		test_list.add(item1);
+		test_list.add(item1); 
 		test_list.add(item2);
 		test_dtolist.add(dto1);
 		test_dtolist.add(dto2);

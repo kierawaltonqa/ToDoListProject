@@ -34,30 +34,31 @@ public class ToDoEntriesControllerUnitTest {
 	private ToDoEntriesDTO mapToDTO(ToDoEntriesDomain model) {
 		return this.mapper.map(model, ToDoEntriesDTO.class);
 	}
-	
+
 	@Test
 	public void readAll() {
-		//resources
+		// resources
 		List<ToDoEntriesDomain> test_list = new ArrayList<>();
 		List<ToDoEntriesDTO> test_dtolist = new ArrayList<>();
 		Date date = Date.valueOf("2021-02-06");
-		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, true, null);
 		ToDoEntriesDTO test_dto = mapToDTO(test_entry);
 		Date date2 = Date.valueOf("2021-02-07");
-		ToDoEntriesDomain test_entry2 = new ToDoEntriesDomain(2L, "task 2", date2, null);
+		ToDoEntriesDomain test_entry2 = new ToDoEntriesDomain(2L, "task 2", date2, true, null);
 		ToDoEntriesDTO test_dto2 = mapToDTO(test_entry2);
 		test_list.add(test_entry);
 		test_list.add(test_entry2);
 		test_dtolist.add(test_dto);
-		test_dtolist.add(test_dto2); 
-		//rules
+		test_dtolist.add(test_dto2);
+		// rules
 		Mockito.when(service.readAll()).thenReturn(test_dtolist);
-		//results
-		ResponseEntity <List<ToDoEntriesDTO>> result = this.controller.readAll();
-		ResponseEntity <List<ToDoEntriesDTO>> result2 = new ResponseEntity<List<ToDoEntriesDTO>>(test_dtolist, HttpStatus.OK);
-		//assertions
+		// results
+		ResponseEntity<List<ToDoEntriesDTO>> result = this.controller.readAll();
+		ResponseEntity<List<ToDoEntriesDTO>> result2 = new ResponseEntity<List<ToDoEntriesDTO>>(test_dtolist,
+				HttpStatus.OK);
+		// assertions
 		Assertions.assertThat(result).isEqualTo(result2);
-		
+
 		Mockito.verify(this.service, Mockito.times(1)).readAll();
 	}
 
@@ -65,7 +66,7 @@ public class ToDoEntriesControllerUnitTest {
 	public void readOne() {
 		// resources
 		Date date = Date.valueOf("2021-02-06");
-		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, true, null);
 		ToDoEntriesDTO test_dto = mapToDTO(test_entry);
 		// rules
 		Mockito.when(this.service.readOne(1L)).thenReturn(test_dto);
@@ -74,7 +75,7 @@ public class ToDoEntriesControllerUnitTest {
 		ResponseEntity<ToDoEntriesDTO> result2 = new ResponseEntity<ToDoEntriesDTO>(test_dto, HttpStatus.OK);
 		// assertions
 		Assertions.assertThat(result).isEqualTo(result2);
-		
+
 		Mockito.verify(this.service, Mockito.times(1)).readOne(1L);
 	}
 
@@ -82,7 +83,7 @@ public class ToDoEntriesControllerUnitTest {
 	public void create() {
 		// resources
 		Date date = Date.valueOf("2021-02-06");
-		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, true, null);
 		ToDoEntriesDTO test_dto = mapToDTO(test_entry);
 		// rules
 		Mockito.when(this.service.create(test_entry)).thenReturn(test_dto);
@@ -99,8 +100,9 @@ public class ToDoEntriesControllerUnitTest {
 	public void update() {
 		// resources
 		Date date = Date.valueOf("2021-02-06");
-		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
-		ToDoEntriesDomain updated_entry = new ToDoEntriesDomain(test_entry.getDescription(), test_entry.getDueDate(), test_entry.getMyList());
+		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, true, null);
+		ToDoEntriesDomain updated_entry = new ToDoEntriesDomain(test_entry.getDescription(), test_entry.getDueDate(),
+				test_entry.isCompleted(), test_entry.getMyList());
 		updated_entry.setId(1L);
 		ToDoEntriesDTO test_dto = mapToDTO(updated_entry);
 		// rules
@@ -108,9 +110,9 @@ public class ToDoEntriesControllerUnitTest {
 		// results
 		ResponseEntity<ToDoEntriesDTO> result = this.controller.update(1L, updated_entry);
 		ResponseEntity<ToDoEntriesDTO> result2 = new ResponseEntity<ToDoEntriesDTO>(test_dto, HttpStatus.ACCEPTED);
-		//assertions
+		// assertions
 		Assertions.assertThat(result).isEqualTo(result2);
-		
+
 		Mockito.verify(this.service, Mockito.times(1)).update(1L, updated_entry);
 	}
 

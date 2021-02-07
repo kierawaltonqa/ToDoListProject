@@ -19,7 +19,7 @@ public class ToDoListsDTOUnitTest {
 
 	private final List<ToDoEntriesDTO> entryList = new ArrayList<>();
 	private final Date date1 = Date.valueOf("2021-02-06");
-	private final ToDoEntriesDTO entry1 = new ToDoEntriesDTO(1L, "create back end", date1);
+	private final ToDoEntriesDTO entry1 = new ToDoEntriesDTO(1L, "create back end", date1, true);
 
 	@Test
 	public void settersTest() {

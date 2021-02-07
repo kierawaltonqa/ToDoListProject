@@ -47,12 +47,12 @@ public class ToDoEntriesControllerIntegrationTest {
 	Date date1 = Date.valueOf("2021-02-06");
 	Date date2 = Date.valueOf("2021-02-12");
 	Date date3 = Date.valueOf("2021-02-07");
-	
+
 	private final int ID = 1;
 
-	private final ToDoEntriesDTO entry1 = new ToDoEntriesDTO(1L, "create back end", date1);
-	private final ToDoEntriesDTO entry2 = new ToDoEntriesDTO(2L, "testing for back end", date2);
-	private final ToDoEntriesDTO entry3 = new ToDoEntriesDTO(3L, "buy dad a birthday present", date3);
+	private final ToDoEntriesDTO entry1 = new ToDoEntriesDTO(1L, "create back end", date1, true);
+	private final ToDoEntriesDTO entry2 = new ToDoEntriesDTO(2L, "testing for back end", date2, false);
+	private final ToDoEntriesDTO entry3 = new ToDoEntriesDTO(3L, "buy dad a birthday present", date3, true);
 
 	private ToDoEntriesDTO mapToDTO(ToDoEntriesDomain model) {
 		return this.mapper.map(model, ToDoEntriesDTO.class);
@@ -91,13 +91,14 @@ public class ToDoEntriesControllerIntegrationTest {
 
 	@Test
 	public void create() throws Exception {
-		ToDoEntriesDomain contentBody = new ToDoEntriesDomain("complete front end", date1, null);
+		ToDoEntriesDomain contentBody = new ToDoEntriesDomain("complete front end", date1, false, null);
 		ToDoEntriesDTO expectedResult = mapToDTO(contentBody);
 		expectedResult.setId(4L);
-		//request
+		// request
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-				.request(HttpMethod.POST, "http://localhost:8080/entries/create").contentType(MediaType.APPLICATION_JSON)
-				.content(jsonifier.writeValueAsString(contentBody)).accept(MediaType.APPLICATION_JSON);
+				.request(HttpMethod.POST, "http://localhost:8080/entries/create")
+				.contentType(MediaType.APPLICATION_JSON).content(jsonifier.writeValueAsString(contentBody))
+				.accept(MediaType.APPLICATION_JSON);
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isCreated();
 		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
@@ -106,9 +107,9 @@ public class ToDoEntriesControllerIntegrationTest {
 	@Test
 	public void update() throws Exception {
 		// resources
-		ToDoEntriesDomain contentBody = new ToDoEntriesDomain(1L, "create back end", date1, null);
+		ToDoEntriesDomain contentBody = new ToDoEntriesDomain(1L, "create back end", date1, true, null);
 		ToDoEntriesDomain updatedBody = new ToDoEntriesDomain(contentBody.getDescription(), contentBody.getDueDate(),
-				contentBody.getMyList());
+				contentBody.isCompleted(), contentBody.getMyList());
 		updatedBody.setId(1L);
 		ToDoEntriesDTO expectedResult = mapToDTO(updatedBody);
 		// request
@@ -125,8 +126,8 @@ public class ToDoEntriesControllerIntegrationTest {
 
 	@Test
 	public void delete() throws Exception {
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-				.request(HttpMethod.DELETE, "http://localhost:8080/entries/delete/" + 2);
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE,
+				"http://localhost:8080/entries/delete/" + 2);
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isNoContent();
 		this.mock.perform(mockRequest).andExpect(matchStatus);
 	}

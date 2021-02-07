@@ -53,9 +53,9 @@ public class ToDoListsControllerIntegrationTest {
 	Date date2 = Date.valueOf("2021-02-12");
 	Date date3 = Date.valueOf("2021-02-07");
 
-	private final ToDoEntriesDTO entry1 = new ToDoEntriesDTO(1L, "create back end", date1);
-	private final ToDoEntriesDTO entry2 = new ToDoEntriesDTO(2L, "testing for back end", date2);
-	private final ToDoEntriesDTO entry3 = new ToDoEntriesDTO(3L, "buy dad a birthday present", date3);	
+	private final ToDoEntriesDTO entry1 = new ToDoEntriesDTO(1L, "create back end", date1, true);
+	private final ToDoEntriesDTO entry2 = new ToDoEntriesDTO(2L, "testing for back end", date2, false);
+	private final ToDoEntriesDTO entry3 = new ToDoEntriesDTO(3L, "buy dad a birthday present", date3, true);	
 
 	@Test
 	public void readAll() throws Exception {
