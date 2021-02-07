@@ -49,7 +49,7 @@ public class ToDoEntriesControllerUnitTest {
 		test_list.add(test_entry);
 		test_list.add(test_entry2);
 		test_dtolist.add(test_dto);
-		test_dtolist.add(test_dto2);
+		test_dtolist.add(test_dto2); 
 		//rules
 		Mockito.when(service.readAll()).thenReturn(test_dtolist);
 		//results
@@ -120,7 +120,7 @@ public class ToDoEntriesControllerUnitTest {
 //		Date date = Date.valueOf("2021-02-06");
 //		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
 //		//rules
-//		Mockito.when(this.controller.delete(test_entry.getId())).then(null)
+//		Mockito.when(this.controller.delete(test_entry.getId())).then(null);
 	}
 
 }
