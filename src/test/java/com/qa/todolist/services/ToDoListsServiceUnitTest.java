@@ -29,7 +29,7 @@ public class ToDoListsServiceUnitTest {
 	
 	@Test
 	public void readAll() {
-		Long id = 1L;
+		Long id = 1L; 
 		ToDoListsDomain test_list = new ToDoListsDomain(1L, "list 1", null);
 		test_list.setId(id);
 		List<ToDoListsDomain> lists = this.mockedRepo.findAll(); 
@@ -64,7 +64,7 @@ public class ToDoListsServiceUnitTest {
 		// assertions
 		Assertions.assertThat(result).isNotNull();
 		Assertions.assertThat(result).isEqualTo(test_dto);
-
+		
 		Mockito.verify(this.mockedMapper, Mockito.times(1)).map(test_list, ToDoListsDTO.class);
 		Mockito.verify(this.mockedRepo, Mockito.times(1)).save(Mockito.any(ToDoListsDomain.class));
 	}

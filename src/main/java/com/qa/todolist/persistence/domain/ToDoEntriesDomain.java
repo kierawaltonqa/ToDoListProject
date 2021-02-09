@@ -46,7 +46,7 @@ public class ToDoEntriesDomain {
 		this.completed = completed;
 		this.myList = myList;
 	}
-
+ 
 	// constructor without id (for testing purposes)
 	public ToDoEntriesDomain(String description, Date dueDate, boolean completed, ToDoListsDomain myList) {
 		super();

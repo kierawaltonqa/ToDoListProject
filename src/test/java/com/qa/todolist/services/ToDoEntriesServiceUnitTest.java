@@ -107,7 +107,7 @@ public class ToDoEntriesServiceUnitTest {
 
 		Mockito.verify(this.mockedMapper, Mockito.times(1)).map(updated_entry, ToDoEntriesDTO.class);
 		Mockito.verify(this.mockedRepo, Mockito.times(1)).save(Mockito.any(ToDoEntriesDomain.class));
-	}
+	} 
 
 	@Test
 	public void delete() {
