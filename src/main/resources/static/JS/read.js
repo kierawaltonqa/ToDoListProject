@@ -73,7 +73,7 @@ const readEntries = () => {
 //read by ID
 const readById = () => {
     const Id = listID.value;
-    fetch("http://localhost:8080/lists/read/" + 1, {
+    fetch("http://localhost:8080/lists/read/" + Id, {
         method: "GET"
     })
         .then((response) => {
@@ -88,8 +88,8 @@ const readById = () => {
                     console.log(infofromserver.data); // key - return array(6)
                     printToScreen(infofromserver.id);
                     printToScreen(infofromserver.title);
-                    let myJSON = JSON.stringify(infofromserver.toDoList);
-                    printToScreen(myJSON)
+                    let objJSON = JSON.stringify(infofromserver.toDoList);
+                    printToScreen(objJSON);
                 })
             }
         }).catch((err) => {
