@@ -41,8 +41,6 @@ const createList = () => {
     let data = {
         title: listTitle2
     }
-    console.log(data);
-
     fetch("http://localhost:8080/lists/create", {
         method: "POST",
         body: JSON.stringify(data),
@@ -83,7 +81,7 @@ const createTask = () => {
         .then(response => response.json())
         .then(info => {
             console.log(info);
-            printTasks(`${info.description} + ${info.dueDate}`);
+            printTasks(`task: ${info.description}, complete by: ${info.dueDate}`);
         })
         .catch(err => console.error('ERROR!' + err));
 }
