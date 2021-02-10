@@ -7,13 +7,20 @@ const ID = document.querySelector("#IdOfList")
 
 const createListButton = document.querySelector("#createButton");
 const addTaskButton = document.querySelector("#addButton");
+const finishedButton = document.querySelector("#finishAddButton");
 
 const showList = document.querySelector("#createList");
 const showTasks = document.querySelector("#taskList");
 
+//clear creation details from the screen
+const clearDetails = () => {
+    showTasks.innerHTML = "";
+    showList.innerHTML = "";
+}
+
 const printScreen = (title) => {
     let element = document.createElement("h3");
-    let text = document.createTextNode(`${title}`);
+    let text = document.createTextNode(`new list: ${title}`);
     element.appendChild(text);
     showList.appendChild(element);
 }
@@ -80,3 +87,4 @@ const createTask = () => {
 //event listeners
 createListButton.addEventListener("click", createList);
 addTaskButton.addEventListener("click", createTask);
+finishedButton.addEventListener("click", clearDetails);

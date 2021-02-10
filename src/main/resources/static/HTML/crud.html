@@ -53,6 +53,8 @@
                     <label class="form-check-label">Enter List Title:</label>
                     <input type="text" class="form-control" id="listTitle">
                     <button type="submit" class="btn btn-primary" id="createButton">Create List</button>
+                    <div id="createList"></div>
+                    <br />
                 </div>
                 <h4>Add Tasks To List:</h4>
                 <div class="form-group">
@@ -61,6 +63,7 @@
                     <label class="form-check-label">Enter The List ID:</label>
                     <input type="text" class="form-control" id="IdOfList" , placeholder="List ID">
                     <button type="submit" class="btn btn-primary" id="addButton">Add Task</button>
+                    <button type="submit" class="btn btn-dark" id="finishAddButton">Finished Adding</button>
                 </div>
 
             </div>
@@ -81,17 +84,24 @@
             </div>
             <div class="col-md">
                 <h4>Delete List By ID</h4>
-                <label class="form-check-label">Enter List ID:</label>
-                <input type="text" class="form-control" id="deletelistId">
-                <button type="button" class="btn btn-danger" id="deleteListButton">Delete List</button>
+                <div class="form-group">
+                    <label class="form-check-label">Enter List ID:</label>
+                    <input type="text" class="form-control" id="deletelistId">
+                    <button type="button" class="btn btn-danger" id="deleteListButton">Delete List</button>
+                </div>
+                <h4>Delete Task From List</h4>
+                <label class="form-check-label">Enter Task ID:</label>
+                <input type="text" class="form-control" id="deletetaskId">
+                <button type="button" class="btn btn-danger" id="deleteTaskButton">Delete List</button>
             </div>
         </div>
+    </div>
     </div>
     <div class="container">
         <br />
         <div class="row">
             <div class="col-sm">
-                <div id="createList"></div>
+
                 <ul id="taskList">
 
                 </ul>
