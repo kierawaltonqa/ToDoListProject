@@ -9,22 +9,35 @@ const taskID = document.querySelector("#taskIDUpdate");
 
 const updateListButton = document.querySelector("#updateListButton");
 const updateTaskButton = document.querySelector("#updateButton");
+const finishedUpdateButton = document.querySelector("#finishUpdateButton");
 
 const showNewTasks = document.querySelector("#updatedTaskList");
 const showNewListTitle = document.querySelector("#showUpdate");
 
+//print new list title to screen
 const printNewTitle = (title) => {
+    let element2 = document.createElement("h6");
+    let text2 = document.createTextNode("new list title:")
+    element2.appendChild(text2);
     let element = document.createElement("h3");
     let text = document.createTextNode(`${title}`);
     element.appendChild(text);
+    showNewListTitle.appendChild(element2);
     showNewListTitle.appendChild(element);
 }
 
+//print new task to screen
 const printNewTask = (task) => {
     let element = document.createElement("li");
     let text = document.createTextNode(`${task}`);
     element.appendChild(text);
     showNewTasks.appendChild(element);
+}
+
+//clear update details from screen
+const clearUpdateDetails = () => {
+    showNewTasks.innerHTML = "";
+    showNewListTitle.innerHTML = "";
 }
 
 //update list
@@ -81,3 +94,4 @@ const updateTask = () => {
 //event listeners
 updateListButton.addEventListener("click", updateList);
 updateTaskButton.addEventListener("click", updateTask);
+finishedUpdateButton.addEventListener("click", clearUpdateDetails);

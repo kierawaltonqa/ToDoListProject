@@ -5,6 +5,15 @@ const taskid = document.querySelector("#deletetaskId");
 
 const deleteButton = document.querySelector("#deleteListButton");
 const deleteTaskButton = document.querySelector("#deleteTaskButton");
+const showDeletedEntry = document.querySelector("#showDeleted");
+
+//method to print delete message
+const deleteSuccess = (id) => {
+    let element = document.createElement("p");
+    let text = document.createTextNode(`task with id ${id} deleted`);
+    element.appendChild(text);
+    showDeletedEntry.appendChild(element);
+}
 
 //delete method for lists
 const deleteList = () => {

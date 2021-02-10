@@ -1,18 +1,37 @@
 `use-strict`;
 
-
-readAllToDos = document.querySelector("#showLists");
-listID = document.querySelector("#listId");
+const readAllToDos = document.querySelector("#showLists");
+const listID = document.querySelector("#listId");
 
 const readAllButton = document.querySelector("#readLists");
 const clearListsButton = document.querySelector("#clearLists");
-const viewByIdButton = document.querySelector("#readListById")
+const viewByIdButton = document.querySelector("#readListById");
 
+//WORKING METHOD
 const printToScreen = (list) => {
     let element = document.createElement("p");
     let text = document.createTextNode(`${list}`);
     element.appendChild(text);
     readAllToDos.appendChild(element);
+}
+const printToScreen2 = (list) => {
+    let element = document.createElement("h4");
+    let text = document.createTextNode(`${list}`);
+    element.appendChild(text);
+    readAllToDos.appendChild(element);
+}
+
+const jsonConverter = (tasks) => {
+    let id = tasks.id;
+    let title = tasks.title;
+    let description = tasks.description;
+    let dueDate = tasks.dueDate;
+    let toDoList = JSON.stringify(tasks.toDoList);
+
+    let printedString1 = `${id}: ${title}`;
+    let printedString2 = `Tasks: ${toDoList}`;
+    printToScreen2(printedString1);
+    printToScreen(printedString2);
 }
 
 //clear all lists from screen
@@ -34,13 +53,16 @@ const readLists = () => {
                 //json-ify it (which returns a promise)
                 response.json().then((infofromserver) => {
                     console.log(infofromserver);
-                    console.log(infofromserver.data);
                     for (let each of infofromserver) {
-                        printToScreen(each.id);
-                        printToScreen(each.title);
-                        let objJSON = JSON.stringify(each.toDoList);
-                        printToScreen(objJSON);
+                        jsonConverter(each);
                     }
+                    // for (let each of infofromserver) {
+                    //     console.log(each.title);
+                    //     printToScreen(each.id);
+                    //     printToScreen(each.title);
+                    //     let objJSON = JSON.stringify(each.toDoList);
+                    //     printToScreen(objJSON);
+                    // }
                 })
             }
         }).catch((err) => {
@@ -48,7 +70,7 @@ const readLists = () => {
         })
 }
 
-//read all to do entries method 
+//read all to do entries method - NOT CURRENTLY USED - DON'T NEED??
 const readEntries = () => {
     fetch("http://localhost:8080/entries/readAll", {
         method: "GET"
@@ -85,11 +107,12 @@ const readById = () => {
                 //json-ify it (which returns a promise)
                 response.json().then((infofromserver) => {
                     console.log(infofromserver);
-                    console.log(infofromserver.data); // key - return array(6)
-                    printToScreen(infofromserver.id);
-                    printToScreen(infofromserver.title);
-                    let objJSON = JSON.stringify(infofromserver.toDoList);
-                    printToScreen(objJSON);
+                    jsonConverter(infofromserver);
+                    // console.log(infofromserver.data); // key - return array(6)
+                    // printToScreen(infofromserver.id);
+                    // printToScreen(infofromserver.title);
+                    // let objJSON = JSON.stringify(infofromserver.toDoList);
+                    // printToScreen(objJSON);
                 })
             }
         }).catch((err) => {
