@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+
+            </div>
+            <div class="col-sm">
+                <h1 class="display-1">My To-Do List Creator</h1>
+            </div>
+            <div class="col-sm">
+
+            </div>
+        </div>
+    </div>
+    </br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+
+            </div>
+            <div class="col-sm">
+                <h3>Enter a title for your to-do list</h3>
+                </br>
+                <div class="input-group mb-3" required>
+                    <input type="text" class="form-control" placeholder="To-Do List title" id="ToDoTitle"
+                        aria-label="To-Do list title" aria-describedby="button-addon2" required>
+                    <button class="btn btn-outline-primary" type="button" onclick="createToDo()"
+                        id="button-addon2">Create</button>
+                </div>
+                <div id="showID"></div>
+            </div>
+            <div class="col-sm">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+                <h5>And a couple of tasks to get you started if you want</h5>
+                <input type="text" class="form-control" id="task1input" placeholder="Task #1">
+                </br>
+                <input type="text" class="form-control" id="task2input" placeholder="Task #2">
+                </br>
+                <input type="text" class="form-control" id="task3input" placeholder="Task #3">
+                </br>
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="inputid" class="col-form-label">Todo list ID</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="number" id="inputid" class="form-control" aria-describedby="passwordHelpInline">
+
+                    </div>
+
+                </div>
+                </br>
+                <button type="button" onclick="createTask()" class="btn btn-primary btn-lg">Create Tasks</button>
+                </br>
+                <div id="showTask"></div>
+            </div>
+            <div class="col-sm">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
