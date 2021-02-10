@@ -3,7 +3,7 @@
 const id = document.querySelector("#updatelistId");
 const title = document.querySelector("#updatelistTitle");
 const description = document.querySelector("#taskTitleUpdate");
-const dueDate = document.querySelector("#taskDueDateUpdate");
+const dueDateForTask = document.querySelector("#taskDueDateUpdate");
 const idOfListForTask = document.querySelector("#IdOfListUpdate");
 const taskID = document.querySelector("#taskIDUpdate");
 
@@ -54,7 +54,7 @@ const updateList = () => {
 const updateTask = () => {
     const taskId = taskID.value;
     const taskDescription = description.value;
-    const taskDueDate = dueDate.value;
+    const taskDueDate = dueDateForTask.value;
     const taskListId = idOfListForTask.value;
 
     let data = {
@@ -63,7 +63,7 @@ const updateTask = () => {
         dueDate: taskDueDate,
         myList: { id: taskListId }
     }
-    fetch("http://localhost:8080/entries/update/" + id, {
+    fetch(`http://localhost:8080/entries/update/${taskId}`, {
         method: "PUT",
         body: JSON.stringify(data),
         headers: {
