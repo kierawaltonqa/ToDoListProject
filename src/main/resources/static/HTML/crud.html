@@ -54,12 +54,11 @@
                     <input type="text" class="form-control" id="listTitle">
                     <button type="submit" class="btn btn-primary" id="createButton">Create List</button>
                     <div id="createList"></div>
-                    <br />
                 </div>
                 <h4>Add Tasks To List:</h4>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="taskTitle" placeholder="task title">
-                    <input type="text" class="form-control" id="taskDueDate" , placeholder="due date yyyy-mm-dd">
+                    <input type="text" class="form-control" id="taskTitle" placeholder="task description">
+                    <input type="text" class="form-control" id="taskDueDate" , placeholder="due date (yyyy-mm-dd)">
                     <label class="form-check-label">Enter The List ID:</label>
                     <input type="text" class="form-control" id="IdOfList" , placeholder="List ID">
                     <button type="submit" class="btn btn-primary" id="addButton">Add Task</button>
@@ -77,7 +76,6 @@
                 </div>
                 <div class="form-group">
                     <h4>Read All To Do Lists</h4>
-
                     <button type=" button" class="btn btn-dark" id="readLists">View All
                         Lists</button>
                     <button type=" button" class="btn btn-danger" id="clearLists">Clear
@@ -92,9 +90,33 @@
                     <button type="button" class="btn btn-danger" id="deleteListButton">Delete List</button>
                 </div>
                 <h4>Delete Task From List</h4>
-                <label class="form-check-label">Enter Task ID:</label>
-                <input type="text" class="form-control" id="deletetaskId">
-                <button type="button" class="btn btn-danger" id="deleteTaskButton">Delete Task</button>
+                <div class="form-group">
+                    <label class="form-check-label">Enter Task ID:</label>
+                    <input type="text" class="form-control" id="deletetaskId">
+                    <button type="button" class="btn btn-danger" id="deleteTaskButton">Delete Task</button>
+                </div>
+            </div>
+            <div class="col-md">
+                <h4>Update Lists</h4>
+                <div class="form-group">
+                    <label class="form-check-label">Enter ID Of List To Update:</label>
+                    <input type="text" class="form-control" id="updatelistId">
+                    <label class="form-check-label">Enter Updated Title Of List:</label>
+                    <input type="text" class="form-control" id="updatelistTitle">
+                    <button type="button" class="btn btn-primary" id="updateListButton">Update List</button>
+                    <div id="showUpdate"></div>
+                </div>
+                <h4>Update Tasks in List</h4>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="taskTitleUpdate" placeholder="updated task description">
+                    <input type="text" class="form-control" id="taskDueDateUpdate" ,
+                        placeholder="updated due date (yyyy-mm-dd)">
+                    <label class="form-check-label">Enter The List ID:</label>
+                    <input type="text" class="form-control" id="IdOfListUpdate" , placeholder="List ID">
+                    <button type="submit" class="btn btn-primary" id="updateButton">Update Task</button>
+                    <button type="submit" class="btn btn-dark" id="finishUpdateButton">Finished Updating</button>
+
+                </div>
             </div>
         </div>
     </div>
@@ -114,7 +136,7 @@
             </div>
             </br>
             <div class="col-sm">
-
+                <ul id="updatedTaskList"></ul>
             </div>
         </div>
     </div>
@@ -140,7 +162,7 @@
         </div>
     </div> -->
 
-
+    <script src="../JS/update.js"></script>
     <script src="../JS/delete.js"></script>
     <script src="../JS/create.js"></script>
     <script src="../JS/read.js"></script>
