@@ -46,52 +46,73 @@
     </div>
     <!-- add list section -->
     <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <label class="form-check-label">Enter List Title:</label>
+        <div class="row mt-3">
+            <div class="col-md">
+                <h3>Create To Do List</h3>
+                <div class="form-group">
+                    <label class="form-check-label">Enter List Title:</label>
+                    <input type="text" class="form-control" id="listID">
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="createList();">Create List</button>
+                <!-- <label class="form-check-label">Enter List Title:</label>
                 <input type="text" class="input-group-text" placeholder="title" id="listTitle">
-                <button type="button" class="btn btn-primary" id="createList">Create List</button>
+                <button type="button" class="btn btn-primary" id="createList" onclick="createList();">Create
+                    List</button> -->
+            </div>
+            <!-- read list section -->
+            <div class="col-md">
+                <h4>Read To Do List By ID</h4>
+                <label class="form-check-label">Enter List ID:</label>
+                <input type="text" class="form-control" id="listTitle">
+                <button type="button" class="btn btn-dark" id="readListById" ">View List</button>
+            </div>
+            <div class=" col-md">
+                    <h4>Read All To Do Lists</h4>
+                    <button type=" button" class="btn btn-dark" id="readLists" onclick="readLists();">View All
+                        Lists</button>
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
 
-    <!-- create task modal -->
-    <div class="modal fade " id="createMethod" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">Create your task</h2>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
+            </div>
+            <div class="col-sm">
 
-                        <div class="mb-3 input-group">
-                            <input class="input-group-text" type="text" id="name" placeholder="Name" />
-                        </div>
-                        <div class="mb-3 input-group">
-                            <input class="input-group-text" type="number" name="price" id="price" placeholder="Cost">
-                        </div>
-                        <div class="mb-3 input-group">
-                            <input class="input-group-text" type="number" name="type" id="workers"
-                                placeholder="Workers">
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-text">Description</span>
-                            <textarea class="form-control" aria-label="With textarea"></textarea>
-                        </div>
+                <div id="showLists"></div>
+            </div>
+            </br>
+            <div class="col-sm">
 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="">Create task</button>
-                </div>
             </div>
         </div>
     </div>
+    <!-- reading/viewing the lists -->
+    <!-- <div class="posts-list row">
+        <div class="card mt-4 col-md-6 bg-light">
+            <div class="card-body">
+                <h5 class-"card-title">List Title</h5>
+                <button type="button" class="btn btn-primary" id="addEntry">Add Task</button>
+                <p> </p>
+                <a href="#" class="card-link">Edit</a>
+                <a href="#" class="card-link">Delete</a>
+            </div>
+        </div>
+        <div class="card mt-4 col-md-6 bg-light">
+            <div class="card-body">
+                <h5 class-"card-title">List Title</h5>
+                <button type="button" class="btn btn-primary" id="addEntry">Add Task</button>
+                <p> </p>
+                <a href="#" class="card-link">Edit</a>
+                <a href="#" class="card-link">Delete</a>
+            </div>
+        </div>
+    </div> -->
 
+
+
+    <script src="../JS/createList.js"></script>
     <script src="../JS/read.js"></script>
     <!-- bootstrap scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

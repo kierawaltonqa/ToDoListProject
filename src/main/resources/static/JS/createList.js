@@ -1,13 +1,18 @@
 `use-strict`;
 
+const postList = document.querySelector(".post-list");
+
+
 const listTitle = document.querySelector("#listTitle");
 
 const createList = () => {
-    const listTitle = listTitle.nodeValue;
+
+    const listTitle2 = listTitle.nodeValue;
 
     let data = {
-        title: listTitle
+        title: listTitle2
     }
+    console.log(data);
 
     fetch("http://localhost:8080/lists/create", {
         method: "POST",
