@@ -1,13 +1,21 @@
 `use-strict`;
 
+
 readAllToDos = document.querySelector("#showLists");
-readOneToDo = document.querySelector("#listId")
+readOneToDo = document.querySelector("#listId");
+
+const readAllButton = document.querySelector("#readLists");
+const clearListsButton = document.querySelector("#clearLists");
 
 const printToScreen = (list) => {
     let element = document.createElement("p");
     let text = document.createTextNode(`${list}`);
     element.appendChild(text);
     readAllToDos.appendChild(element);
+}
+
+const clearListsFromScreen = () => {
+    readAllToDos.innerHTML = "";
 }
 
 //read all lists method
@@ -37,7 +45,6 @@ const readLists = () => {
             console.error(err);
         })
 }
-readLists();
 
 //read all to do entries method 
 const readEntries = () => {
@@ -60,3 +67,6 @@ const readEntries = () => {
             console.error(err);
         })
 }
+
+readAllButton.addEventListener("click", readLists);
+clearListsButton.addEventListener("click", clearListsFromScreen);
