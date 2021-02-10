@@ -20,9 +20,13 @@ const clearDetails = () => {
 
 const printScreen = (title) => {
     let element = document.createElement("h3");
-    let text = document.createTextNode(`new list: ${title}`);
+    let text = document.createTextNode(`new list: ${title.title}`);
+    let element2 = document.createElement("p");
+    let text2 = document.createTextNode(`with id: ${title.id}`);
+    element2.appendChild(text2);
     element.appendChild(text);
     showList.appendChild(element);
+    showList.appendChild(element2);
 }
 
 const printTasks = (tasks) => {
@@ -51,7 +55,7 @@ const createList = () => {
         .then(info => {
             console.log(info);
             //print title to screen
-            printScreen(info.title);
+            printScreen(info);
         })
         .catch(err => console.error('ERROR!' + err));
 }
