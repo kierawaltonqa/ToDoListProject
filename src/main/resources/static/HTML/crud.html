@@ -54,6 +54,14 @@
                     <input type="text" class="form-control" id="listTitle">
                     <button type="submit" class="btn btn-primary" id="createButton">Create List</button>
                 </div>
+                <h4>Add Tasks To List:</h4>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="taskTitle" placeholder="task title">
+                    <input type="text" class="form-control" id="taskDueDate" , placeholder="due date yyyy-mm-dd">
+                    <label class="form-check-label">Enter The List ID:</label>
+                    <input type="text" class="form-control" id="IdOfList" , placeholder="List ID">
+                    <button type="submit" class="btn btn-primary" id="addButton">Add Task</button>
+                </div>
 
             </div>
             <!-- read list section -->
@@ -78,6 +86,9 @@
         <div class="row">
             <div class="col-sm">
                 <div id="createList"></div>
+                <ul id="taskList">
+
+                </ul>
             </div>
             <div class="col-sm">
 

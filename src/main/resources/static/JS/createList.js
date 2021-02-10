@@ -1,22 +1,28 @@
 `use-strict`;
 
 const listTitle = document.querySelector("#listTitle");
+const taskTitle = document.querySelector("#taskTitle");
+const dueDate = document.querySelector("#taskDueDate");
+const ID = document.querySelector("#IdOfList")
 
 const createListButton = document.querySelector("#createButton");
+const addTaskButton = document.querySelector("#addButton");
 
 const showList = document.querySelector("#createList");
+const showTasks = document.querySelector("#taskList");
 
 const printScreen = (title) => {
     let element = document.createElement("h3");
     let text = document.createTextNode(`${title}`);
-    let button = document.createElement("button");
-    let button2 = document.createElement("button");
-    button.innerHTML = "Add Task";
-    button2.innerHTML = "Delete";
     element.appendChild(text);
     showList.appendChild(element);
-    showList.appendChild(button);
-    showList.appendChild(button2);
+}
+
+const printTasks = (tasks) => {
+    let element = document.createElement("li");
+    let text = document.createTextNode(`${tasks}`);
+    element.appendChild(text);
+    showTasks.appendChild(element);
 }
 
 const createList = () => {
@@ -44,6 +50,17 @@ const createList = () => {
 }
 
 const createTask = () => {
+    const taskTitle2 = taskTitle.value;
+    const dueDate2 = dueDate.value;
+    const listId = ID.value;
+
+    let data = {
+        description: taskTitle2,
+        dueDate: dueDate2,
+        completed: false,
+        myList: { id: listId }
+    }
+
     fetch("http://localhost:8080/entries/create", {
         method: "POST",
         body: JSON.stringify(data),
@@ -55,11 +72,11 @@ const createTask = () => {
         .then(response => response.json())
         .then(info => {
             console.log(info);
+            printTasks(`${info.description} + ${info.dueDate}`);
         })
         .catch(err => console.error('ERROR!' + err));
 }
 
-
+//event listeners
 createListButton.addEventListener("click", createList);
-
-
+addTaskButton.addEventListener("click", createTask);
