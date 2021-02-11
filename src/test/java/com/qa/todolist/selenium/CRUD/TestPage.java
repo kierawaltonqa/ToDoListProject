@@ -4,30 +4,50 @@ import static org.junit.Assert.assertTrue;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
 public class TestPage {
 	private static RemoteWebDriver driver;
 	private String url = "http://localhost:8080/index.html";
+	private static ExtentReports report;
+	private static ExtentTest test;
 
 	@BeforeAll
 	public static void init() {
+		// extent report
+		report = new ExtentReports("target/reports/TestPageReport.html", true);
+		// system property
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chrome/chromedriver.exe");
 		driver = new ChromeDriver();
+	}
+
+	@AfterEach
+	public void endTest() {
+		report.endTest(test);
 	}
 
 	@AfterAll
 	public static void after() {
 		// closes the chrome driver
 		driver.quit();
+		// clean up extent reports
+		report.flush();
+		report.close();
 	}
 
 	@Test
 	public void readAll() {
+		//set up extent report
+		test = report.startTest("Read All Lists Test");
 		// given that I can access the index page
 		driver.get(url);
 		HomePage website = PageFactory.initElements(driver, HomePage.class);
@@ -36,7 +56,12 @@ public class TestPage {
 		website.read.readAll();
 		// I should be able to view all lists on the database
 		String status = website.read.readAllStatus();
-		// String expected = "1: General Tasks";
+		String expected = "1: General Tasks";
+		if(status.contains(expected)) {
+			test.log(LogStatus.PASS, expected);
+		}else {
+			test.log(LogStatus.FAIL, "Read All Test Failed");
+		}
 		// assertions
 		Assertions.assertThat(status).isNotNull();
 		assertTrue(status.contains("1: General Tasks"));
@@ -89,6 +114,10 @@ public class TestPage {
 		String expected = "new list entry";
 		// assertions
 		assertTrue(status.contains(expected));
+		// NEED TO WORK OUT HOW TO TEST FOR DATE
+		// assertTrue(status.contains("task: expected, complete
+		// by:2021-02-12T00:00:00.000+00:00"));
+		// ALSO COULD/SHOULD HAVE MORE/DIFFERENT ASSERTIONS HERE
 	}
 
 }
