@@ -6,6 +6,7 @@ const description = document.querySelector("#taskTitleUpdate");
 const dueDateForTask = document.querySelector("#taskDueDateUpdate");
 const idOfListForTask = document.querySelector("#IdOfListUpdate");
 const taskID = document.querySelector("#taskIDUpdate");
+//const taskComplete = document.querySelector("#complete");
 
 const updateListButton = document.querySelector("#updateListButton");
 const updateTaskButton = document.querySelector("#updateButton");
