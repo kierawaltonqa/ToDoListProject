@@ -6,7 +6,8 @@ const description = document.querySelector("#taskTitleUpdate");
 const dueDateForTask = document.querySelector("#taskDueDateUpdate");
 const idOfListForTask = document.querySelector("#IdOfListUpdate");
 const taskID = document.querySelector("#taskIDUpdate");
-//const taskComplete = document.querySelector("#complete");
+//THIS IS NOT WORKING - RETURN TO IT 
+const taskComplete = document.getElementById("completed").checked;
 
 const updateListButton = document.querySelector("#updateListButton");
 const updateTaskButton = document.querySelector("#updateButton");
@@ -70,11 +71,13 @@ const updateTask = () => {
     const taskDescription = description.value;
     const taskDueDate = dueDateForTask.value;
     const taskListId = idOfListForTask.value;
+    const complete = taskComplete;
 
     let data = {
         id: taskId,
         description: taskDescription,
         dueDate: taskDueDate,
+        completed: complete,
         myList: { id: taskListId }
     }
     fetch(`http://localhost:8080/entries/update/${taskId}`, {
