@@ -29,7 +29,7 @@ public class ToDoEntriesDomainUnitTest {
 		Assertions.assertThat(entry.getId()).isNotNull();
 		Assertions.assertThat(entry.getDescription()).isNotNull();
 		Assertions.assertThat(entry.getDueDate()).isNotNull();
-		Assertions.assertThat(entry.isCompleted());
+		Assertions.assertThat(entry.isCompleted()).isTrue();
 		Assertions.assertThat(entry.getMyList()).isNull();
 
 	}
