@@ -1,5 +1,5 @@
 package com.qa.todolist.selenium.CRUD;
 
-public class UpdateToDos {
+public class UpdateEntry {
 
 }

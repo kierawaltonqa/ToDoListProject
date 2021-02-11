@@ -35,7 +35,7 @@ public class ToDoEntriesDTOUnitTest {
 		Assertions.assertThat(entry.getId()).isNotNull();
 		Assertions.assertThat(entry.getDescription()).isNotNull();
 		Assertions.assertThat(entry.getDueDate()).isNotNull();
-		Assertions.assertThat(entry.isCompleted()).isNotNull();
+		Assertions.assertThat(entry.isCompleted()).isTrue();
 	}
 
 	@Test
@@ -79,16 +79,19 @@ public class ToDoEntriesDTOUnitTest {
 		other.setDescription(null);
 		Assertions.assertThat(other.getDescription()).isNotEqualTo(other2.getDescription());
 	}
+
 	@Test
 	public void falseCompleted() {
 		entry.setCompleted(false);
 		Assertions.assertThat(entry.isCompleted()).isFalse();
 	}
+
 	@Test
 	public void falseCompleted2() {
 		entry.setCompleted(false);
 		Assertions.assertThat(entry.isCompleted()).isNotEqualTo(other.isCompleted());
 	}
+
 	@Test
 	public void trueCompleted() {
 		Assertions.assertThat(entry.isCompleted()).isTrue();

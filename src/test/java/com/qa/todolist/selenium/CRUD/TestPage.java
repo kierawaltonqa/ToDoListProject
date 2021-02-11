@@ -37,7 +37,7 @@ public class TestPage {
 		// clear any data that might have been printed to the webpage screen
 		driver.get("http://localhost:8080/index.html");
 		HomePage website = PageFactory.initElements(driver, HomePage.class);
-//		// I want to navigate to the crud lists page clear all data from the screen
+		// I want to navigate to the crud lists page clear all data from the screen
 		website.navCrudLists();
 		website.clear.clearAllDataFromScreen();
 	}
@@ -118,7 +118,7 @@ public class TestPage {
 		// I want to navigate to the crud lists page
 		website.navCrudLists();
 		// and I want to create a new list entry
-		website.createEntry.createNewEntry("new list entry", "12-02-2021", "2");
+		website.createEntry.createNewEntry("new list entry", "12-02-2021", "1");
 		// I should be able to view this new list entry on the screen
 		String status = website.createEntry.status();
 		String expected = "new list entry";
@@ -128,6 +128,23 @@ public class TestPage {
 		// assertTrue(status.contains("task: expected, complete
 		// by:2021-02-12T00:00:00.000+00:00"));
 		// ALSO COULD/SHOULD HAVE MORE/DIFFERENT ASSERTIONS HERE
+	}
+
+	@Test
+	public void updateList() {
+		// given that I can access the index page
+		driver.get(url);
+		HomePage website = PageFactory.initElements(driver, HomePage.class);
+		// I want to navigate to the crud lists page
+		website.navCrudLists();
+		// and I want to update the title of a pre-existing list
+		website.updateList.updateListEntry("1", "General Tasks Updated");
+		// then I should be able to view the updated list title on the screen
+		String status = website.updateList.status();
+		String expected = "General Tasks Updated";
+		// assertions
+		assertTrue(status.contains(expected));
+		
 	}
 
 	@Test

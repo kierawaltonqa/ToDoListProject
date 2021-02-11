@@ -15,7 +15,8 @@ public class HomePage {
 	public CreateList createList;
 	public CreateEntry createEntry;
 	public ReadToDos read;
-	public UpdateToDos update;
+	public UpdateEntry updateEntry;
+	public UpdateList updateList;
 	public Delete delete;
 	public ClearPrintedData clear;
 	
@@ -23,7 +24,8 @@ public class HomePage {
 		this.createList = PageFactory.initElements(driver, CreateList.class);
 		this.createEntry = PageFactory.initElements(driver, CreateEntry.class);
 		this.read = PageFactory.initElements(driver, ReadToDos.class);
-		this.update = PageFactory.initElements(driver, UpdateToDos.class);
+		this.updateEntry = PageFactory.initElements(driver, UpdateEntry.class);
+		this.updateList = PageFactory.initElements(driver, UpdateList.class);
 		this.delete = PageFactory.initElements(driver, Delete.class);
 		this.clear = PageFactory.initElements(driver, ClearPrintedData.class);
 	}
