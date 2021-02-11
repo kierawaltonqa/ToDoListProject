@@ -71,13 +71,13 @@ const updateTask = () => {
     const taskDescription = description.value;
     const taskDueDate = dueDateForTask.value;
     const taskListId = idOfListForTask.value;
-    const complete = taskComplete;
+    const complete = taskComplete.value;
 
     let data = {
         id: taskId,
         description: taskDescription,
         dueDate: taskDueDate,
-        completed: complete,
+        completed: complete ? false : true,
         myList: { id: taskListId }
     }
     fetch(`http://localhost:8080/entries/update/${taskId}`, {
