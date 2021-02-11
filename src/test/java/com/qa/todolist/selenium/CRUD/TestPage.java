@@ -25,35 +25,70 @@ public class TestPage {
 		// closes the chrome driver
 		driver.quit();
 	}
+
 	@Test
 	public void readAll() {
-		//given that I can access the index page
+		// given that I can access the index page
 		driver.get(url);
 		HomePage website = PageFactory.initElements(driver, HomePage.class);
-		//I want to navigate to the crud lists page and read all lists
+		// I want to navigate to the crud lists page and read all lists
 		website.navCrudLists();
 		website.read.readAll();
-		//I should be able to view all lists on the database
+		// I should be able to view all lists on the database
 		String status = website.read.readAllStatus();
-		//String expected = "1: General Tasks";
-		//assertions
+		// String expected = "1: General Tasks";
+		// assertions
 		Assertions.assertThat(status).isNotNull();
 		assertTrue(status.contains("1: General Tasks"));
 	}
+
 	@Test
 	public void readOne() {
-		//given that I can access the index page
+		// given that I can access the index page
 		driver.get(url);
 		HomePage website = PageFactory.initElements(driver, HomePage.class);
-		//I want to navigate to the crud lists page
+		// I want to navigate to the crud lists page
 		website.navCrudLists();
-		//and I want to view a specific list by entering its ID
+		// and I want to view a specific list by entering its ID
 		website.read.readById("1");
-		//I should be able to view the list with ID 1
+		// I should be able to view the list with ID 1
 		String status = website.read.readAllStatus();
 		String expected = "1: General Tasks";
-		//assertions
+		// assertions
 		assertTrue(status.contains(expected));
 	}
-	
+
+	@Test
+	public void createList() {
+		// given that I can access the index page
+		driver.get(url);
+		HomePage website = PageFactory.initElements(driver, HomePage.class);
+		// I want to navigate to the crud lists page
+		website.navCrudLists();
+		// and I want to create a new list
+		website.createList.createNewList("My New List");
+		// I should be able to view this new list title on the screen
+		String status = website.createList.status();
+		String expected = "My New List";
+		// assertions
+		assertTrue(status.contains(expected));
+		assertTrue(status.contains("new list: My New List"));
+	}
+
+	@Test
+	public void createEntry() {
+		// given that I can access the index page
+		driver.get(url);
+		HomePage website = PageFactory.initElements(driver, HomePage.class);
+		// I want to navigate to the crud lists page
+		website.navCrudLists();
+		// and I want to create a new list entry
+		website.createEntry.createNewEntry("new list entry", "12-02-2021", "2");
+		// I should be able to view this new list entry on the screen
+		String status = website.createEntry.status();
+		String expected = "new list entry";
+		// assertions
+		assertTrue(status.contains(expected));
+	}
+
 }

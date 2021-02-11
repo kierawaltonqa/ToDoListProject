@@ -12,13 +12,15 @@ public class HomePage {
 	@FindBy(xpath = "//*[@id=\"navbarResponse\"]/ul/li[2]/a")
 	private WebElement crudLists;
 	
-	public CreateToDos create;
+	public CreateList createList;
+	public CreateEntry createEntry;
 	public ReadToDos read;
 	public UpdateToDos update;
 	public DeleteToDos delete;
 	
 	public HomePage(WebDriver driver) {
-		this.create = PageFactory.initElements(driver, CreateToDos.class);
+		this.createList = PageFactory.initElements(driver, CreateList.class);
+		this.createEntry = PageFactory.initElements(driver, CreateEntry.class);
 		this.read = PageFactory.initElements(driver, ReadToDos.class);
 		this.update = PageFactory.initElements(driver, UpdateToDos.class);
 		this.delete = PageFactory.initElements(driver, DeleteToDos.class);
