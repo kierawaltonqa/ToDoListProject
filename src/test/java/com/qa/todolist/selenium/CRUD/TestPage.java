@@ -28,6 +28,12 @@ public class TestPage {
 		// system property
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chrome/chromedriver.exe");
 		driver = new ChromeDriver();
+//		// clear any data that might have been printed to the webpage screen
+//		driver.get("http://localhost:8080/index.html");
+//		HomePage website = PageFactory.initElements(driver, HomePage.class);
+//		// I want to navigate to the crud lists page and read all lists
+//		website.navCrudLists();
+//		website.clear.clearAllDataFromScreen();
 	}
 
 	@AfterEach
@@ -46,7 +52,7 @@ public class TestPage {
 
 	@Test
 	public void readAll() {
-		//set up extent report
+		// set up extent report
 		test = report.startTest("Read All Lists Test");
 		// given that I can access the index page
 		driver.get(url);
@@ -57,9 +63,9 @@ public class TestPage {
 		// I should be able to view all lists on the database
 		String status = website.read.readAllStatus();
 		String expected = "1: General Tasks";
-		if(status.contains(expected)) {
+		if (status.contains(expected)) {
 			test.log(LogStatus.PASS, expected);
-		}else {
+		} else {
 			test.log(LogStatus.FAIL, "Read All Test Failed");
 		}
 		// assertions
@@ -119,5 +125,14 @@ public class TestPage {
 		// by:2021-02-12T00:00:00.000+00:00"));
 		// ALSO COULD/SHOULD HAVE MORE/DIFFERENT ASSERTIONS HERE
 	}
+
+//	@Test
+//	public void clearCreateDataButtonCheck() {
+//		// given that I can access the index page
+//		driver.get(url);
+//		HomePage website = PageFactory.initElements(driver, HomePage.class);
+//		// I want to navigate to the crud lists page
+//		website.navCrudLists();
+//	}
 
 }

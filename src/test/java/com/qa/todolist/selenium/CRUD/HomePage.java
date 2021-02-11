@@ -16,14 +16,16 @@ public class HomePage {
 	public CreateEntry createEntry;
 	public ReadToDos read;
 	public UpdateToDos update;
-	public DeleteToDos delete;
+	public Delete delete;
+	public ClearPrintedData clear;
 	
 	public HomePage(WebDriver driver) {
 		this.createList = PageFactory.initElements(driver, CreateList.class);
 		this.createEntry = PageFactory.initElements(driver, CreateEntry.class);
 		this.read = PageFactory.initElements(driver, ReadToDos.class);
 		this.update = PageFactory.initElements(driver, UpdateToDos.class);
-		this.delete = PageFactory.initElements(driver, DeleteToDos.class);
+		this.delete = PageFactory.initElements(driver, Delete.class);
+		this.clear = PageFactory.initElements(driver, ClearPrintedData.class);
 	}
 	
 	public void navCrudLists() {
