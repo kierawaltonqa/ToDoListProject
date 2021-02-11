@@ -1,5 +1,6 @@
 package com.qa.todolist.selenium.CRUD;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.assertj.core.api.Assertions;
@@ -28,12 +29,6 @@ public class TestPage {
 		// system property
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chrome/chromedriver.exe");
 		driver = new ChromeDriver();
-//		// clear any data that might have been printed to the webpage screen
-//		driver.get("http://localhost:8080/index.html");
-//		HomePage website = PageFactory.initElements(driver, HomePage.class);
-//		// I want to navigate to the crud lists page and read all lists
-//		website.navCrudLists();
-//		website.clear.clearAllDataFromScreen();
 	}
 
 	@AfterEach
@@ -42,7 +37,7 @@ public class TestPage {
 		// clear any data that might have been printed to the webpage screen
 		driver.get("http://localhost:8080/index.html");
 		HomePage website = PageFactory.initElements(driver, HomePage.class);
-//		// I want to navigate to the crud lists page and read all lists
+//		// I want to navigate to the crud lists page clear all data from the screen
 		website.navCrudLists();
 		website.clear.clearAllDataFromScreen();
 	}
@@ -135,13 +130,52 @@ public class TestPage {
 		// ALSO COULD/SHOULD HAVE MORE/DIFFERENT ASSERTIONS HERE
 	}
 
+	@Test
+	public void deleteList() {
+		// given that I can access the index page
+		driver.get(url);
+		HomePage website = PageFactory.initElements(driver, HomePage.class);
+		// I want to navigate to the crud lists page
+		website.navCrudLists();
+		// and I want to delete a list by its ID
+		website.delete.deleteList("2");
+		// now when I read lists, this list with ID 2 is gone
+		website.read.readById("2");
+		String status = website.read.readAllStatus();
+		// assertions
+		assertTrue(status.isEmpty());
+	}
+
+	@Test
+	public void deleteTask() {
+		// given that I can access the index page
+		driver.get(url);
+		HomePage website = PageFactory.initElements(driver, HomePage.class);
+		// I want to navigate to the crud lists page
+		website.navCrudLists();
+		// and I want to delete a task by its ID
+		website.delete.deleteTask("4");
+		// now when I read lists, the task with this id is gone
+		website.read.readAll();
+		String status = website.read.readAllStatus();
+		// assert that the task with ID 4 is not there
+		assertFalse(status.contains("(id: 4)"));
+	}
+
 //	@Test
-//	public void clearCreateDataButtonCheck() {
+//	public void clearCreateHistory() {
 //		// given that I can access the index page
 //		driver.get(url);
 //		HomePage website = PageFactory.initElements(driver, HomePage.class);
 //		// I want to navigate to the crud lists page
 //		website.navCrudLists();
+//		// and create a new list
+//		website.createList.createNewList("My New List");
+//		// and then select the finished adding button
+//		website.clear.clearAddDetailsFromScreen();
+//		// then my screen should be cleared
+//		String status = website.createList.status();
+//		assertTrue(status.isEmpty());
+//		
 //	}
-
 }
