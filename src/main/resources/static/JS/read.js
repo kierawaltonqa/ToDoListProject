@@ -7,13 +7,13 @@ const readAllButton = document.querySelector("#readLists");
 const clearListsButton = document.querySelector("#clearLists");
 const viewByIdButton = document.querySelector("#readListById");
 
-//WORKING METHOD
-const printToScreen = (list) => {
+const printToScreen3 = (index, description, dueDate, id, completed) => {
     let element = document.createElement("p");
-    let text = document.createTextNode(`${list}`);
+    let text = document.createTextNode(`${index}: ${description}, due: ${dueDate}, completed: ${completed} (id: ${id})`);
     element.appendChild(text);
     readAllToDos.appendChild(element);
 }
+
 const printToScreen2 = (list) => {
     let element = document.createElement("h4");
     let text = document.createTextNode(`${list}`);
@@ -21,17 +21,19 @@ const printToScreen2 = (list) => {
     readAllToDos.appendChild(element);
 }
 
+//json converter
 const jsonConverter = (tasks) => {
     let id = tasks.id;
     let title = tasks.title;
-    let description = tasks.description;
-    let dueDate = tasks.dueDate;
-    let toDoList = JSON.stringify(tasks.toDoList);
-
+    //let toDoList = JSON.stringify(tasks.toDoList);
+    let toDoList = tasks.toDoList;
     let printedString1 = `${id}: ${title}`;
-    let printedString2 = `Tasks: ${toDoList}`;
+
     printToScreen2(printedString1);
-    printToScreen(printedString2);
+    for (let task of toDoList) {
+        let index = toDoList.indexOf(task) + 1;
+        printToScreen3(index, task.description, task.dueDate, task.id, task.completed);
+    }
 }
 
 //clear all lists from screen
@@ -56,13 +58,6 @@ const readLists = () => {
                     for (let each of infofromserver) {
                         jsonConverter(each);
                     }
-                    // for (let each of infofromserver) {
-                    //     console.log(each.title);
-                    //     printToScreen(each.id);
-                    //     printToScreen(each.title);
-                    //     let objJSON = JSON.stringify(each.toDoList);
-                    //     printToScreen(objJSON);
-                    // }
                 })
             }
         }).catch((err) => {
@@ -108,18 +103,12 @@ const readById = () => {
                 response.json().then((infofromserver) => {
                     console.log(infofromserver);
                     jsonConverter(infofromserver);
-                    // console.log(infofromserver.data); // key - return array(6)
-                    // printToScreen(infofromserver.id);
-                    // printToScreen(infofromserver.title);
-                    // let objJSON = JSON.stringify(infofromserver.toDoList);
-                    // printToScreen(objJSON);
                 })
             }
         }).catch((err) => {
             console.error(err);
         })
 }
-
 
 //event listeners for buttons
 readAllButton.addEventListener("click", readLists);
