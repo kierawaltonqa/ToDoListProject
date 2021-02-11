@@ -39,6 +39,12 @@ public class TestPage {
 	@AfterEach
 	public void endTest() {
 		report.endTest(test);
+		// clear any data that might have been printed to the webpage screen
+		driver.get("http://localhost:8080/index.html");
+		HomePage website = PageFactory.initElements(driver, HomePage.class);
+//		// I want to navigate to the crud lists page and read all lists
+		website.navCrudLists();
+		website.clear.clearAllDataFromScreen();
 	}
 
 	@AfterAll
@@ -71,6 +77,8 @@ public class TestPage {
 		// assertions
 		Assertions.assertThat(status).isNotNull();
 		assertTrue(status.contains("1: General Tasks"));
+		assertTrue(status.contains("2: Shopping List"));
+		assertTrue(status.contains("3: QA Project 2 tasks"));
 	}
 
 	@Test
@@ -104,6 +112,7 @@ public class TestPage {
 		// assertions
 		assertTrue(status.contains(expected));
 		assertTrue(status.contains("new list: My New List"));
+
 	}
 
 	@Test
