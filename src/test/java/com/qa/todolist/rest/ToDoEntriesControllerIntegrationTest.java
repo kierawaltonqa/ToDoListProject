@@ -1,15 +1,10 @@
 package com.qa.todolist.rest;
 
 import java.sql.Date;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.CalendarConversion;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -129,6 +124,17 @@ public class ToDoEntriesControllerIntegrationTest {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE,
 				"http://localhost:8080/entries/delete/" + 2);
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isNoContent();
+		this.mock.perform(mockRequest).andExpect(matchStatus);
+	}
+
+	// delete if it doesn't exist
+	@Test
+	public void delete2() throws Exception {
+		// resources
+		Long nonExistantID = 50L;
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE,
+				"http://localhost:8080/entries/delete/" + nonExistantID);
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isInternalServerError();
 		this.mock.perform(mockRequest).andExpect(matchStatus);
 	}
 }

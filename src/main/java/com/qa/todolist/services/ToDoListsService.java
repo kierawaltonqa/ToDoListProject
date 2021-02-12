@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.qa.todolist.persistence.domain.ToDoListsDomain;
@@ -34,26 +35,37 @@ public class ToDoListsService {
 		List<ToDoListsDTO> todoDTOList = todoList.stream().map(this::mapToDTO).collect(Collectors.toList());
 		return todoDTOList;
 	}
-	//GET - read by id
+
+	// GET - read by id
 	public ToDoListsDTO readOne(Long id) {
 		return mapToDTO(this.repo.findById(id).orElseThrow());
 	}
-	//POST - create
+
+	// POST - create
 	public ToDoListsDTO create(ToDoListsDomain model) {
 		return this.mapToDTO(this.repo.save(model));
 	}
-	//PUT - update
+
+	// PUT - update
 	public ToDoListsDTO update(Long id, ToDoListsDomain newDetails) {
 		this.repo.findById(id).orElseThrow();
 		newDetails.setId(id);
 		ToDoListsDTO result = this.mapToDTO(this.repo.save(newDetails));
 		return result;
 	}
-	//DELETE - delete
+
+	// DELETE - delete
 	public boolean delete(Long id) {
-		this.repo.deleteById(id);
-		boolean exists = this.repo.existsById(id);
-		return !exists;
+		try {
+			this.repo.deleteById(id);
+			boolean exists = this.repo.existsById(id);
+
+			return !exists;
+
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
-	
+
 }
