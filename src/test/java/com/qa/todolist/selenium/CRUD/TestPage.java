@@ -3,7 +3,6 @@ package com.qa.todolist.selenium.CRUD;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -64,6 +63,7 @@ public class TestPage {
 		report.close();
 	}
 
+//NOT WORKING - CAN'T FIGURE OUT WHY??
 	@Test
 	public void readAll() {
 		// set up extent report
@@ -83,7 +83,7 @@ public class TestPage {
 			test.log(LogStatus.FAIL, "Read All Test Failed");
 		}
 		// assertions
-		Assertions.assertThat(status).isNotNull();
+		// Assertions.assertThat(status).isNotNull();
 		assertTrue(status.contains("1: General Tasks"));
 		// assertTrue(status.contains("2: QA Project 2 tasks"));
 	}
