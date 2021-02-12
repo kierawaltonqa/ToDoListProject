@@ -96,14 +96,18 @@ public class ToDoListsControllerIntegrationTest {
 
 	@Test
 	public void create() throws Exception {
+		// resources
 		ToDoListsDomain contentBody = new ToDoListsDomain("Shopping List", null);
 		ToDoListsDTO expectedResult = mapToDTO(contentBody);
 		expectedResult.setId(3L);
+		// request
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
 				.request(HttpMethod.POST, "http://localhost:8080/lists/create").contentType(MediaType.APPLICATION_JSON)
 				.content(jsonifier.writeValueAsString(contentBody)).accept(MediaType.APPLICATION_JSON);
+		// expectations
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isCreated();
 		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
+		// action
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
 	}
 

@@ -86,10 +86,6 @@ public class ToDoEntriesControllerIntegrationTest {
 
 	@Test
 	public void create() throws Exception {
-//		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-//		String string = "2021-02-06T00:00:00.000+00:00";
-//		java.util.Date date4 = formatter.parse(string);	
-		// Date date4 = Date.valueOf(string);
 		ToDoEntriesDomain contentBody = new ToDoEntriesDomain("complete front end", date1, false, null);
 		ToDoEntriesDTO expectedResult = mapToDTO(contentBody);
 		expectedResult.setId(4L);
