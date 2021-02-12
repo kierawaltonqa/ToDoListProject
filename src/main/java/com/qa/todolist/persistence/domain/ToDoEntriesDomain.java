@@ -46,12 +46,20 @@ public class ToDoEntriesDomain {
 		this.completed = completed;
 		this.myList = myList;
 	}
- 
+
 	// constructor without id (for testing purposes)
 	public ToDoEntriesDomain(String description, Date dueDate, boolean completed, ToDoListsDomain myList) {
 		super();
 		this.description = description;
 		this.dueDate = dueDate;
+		this.completed = completed;
+		this.myList = myList;
+	}
+
+	// for testing purposes
+	public ToDoEntriesDomain(String description, boolean completed, ToDoListsDomain myList) {
+		super();
+		this.description = description;
 		this.completed = completed;
 		this.myList = myList;
 	}
@@ -96,5 +104,4 @@ public class ToDoEntriesDomain {
 		this.myList = myList;
 	}
 
-	
 }

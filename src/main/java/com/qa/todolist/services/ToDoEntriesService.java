@@ -68,6 +68,5 @@ public class ToDoEntriesService {
 			e.printStackTrace();
 			return false;
 		}
-
 	}
 }

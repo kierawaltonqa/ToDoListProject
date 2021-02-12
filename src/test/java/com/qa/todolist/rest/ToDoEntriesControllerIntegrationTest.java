@@ -86,6 +86,10 @@ public class ToDoEntriesControllerIntegrationTest {
 
 	@Test
 	public void create() throws Exception {
+//		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+//		String string = "2021-02-06T00:00:00.000+00:00";
+//		java.util.Date date4 = formatter.parse(string);	
+		// Date date4 = Date.valueOf(string);
 		ToDoEntriesDomain contentBody = new ToDoEntriesDomain("complete front end", date1, false, null);
 		ToDoEntriesDTO expectedResult = mapToDTO(contentBody);
 		expectedResult.setId(4L);
@@ -94,8 +98,11 @@ public class ToDoEntriesControllerIntegrationTest {
 				.request(HttpMethod.POST, "http://localhost:8080/entries/create")
 				.contentType(MediaType.APPLICATION_JSON).content(jsonifier.writeValueAsString(contentBody))
 				.accept(MediaType.APPLICATION_JSON);
+
+		// expectations
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isCreated();
 		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
+		// actions
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
 	}
 
