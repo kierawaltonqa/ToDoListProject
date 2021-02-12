@@ -76,7 +76,7 @@ public class TestPage {
 		website.read.readAll();
 		// I should be able to view all lists on the database
 		String status = website.read.readAllStatus();
-		String expected = "General Tasks";
+		String expected = "1: General Tasks";
 		if (status.contains(expected)) {
 			test.log(LogStatus.PASS, expected);
 		} else {
@@ -84,8 +84,8 @@ public class TestPage {
 		}
 		// assertions
 		Assertions.assertThat(status).isNotNull();
-		assertTrue(status.contains("General Tasks"));
-		// assertTrue(status.contains("QA Project 2 tasks"));
+		assertTrue(status.contains("1: General Tasks"));
+		// assertTrue(status.contains("2: QA Project 2 tasks"));
 	}
 
 	@Test

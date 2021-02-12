@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ReadToDos {
+public class Read {
 
 	public static String url = "http://localhost:8080/crud.html";
 
@@ -23,7 +23,7 @@ public class ReadToDos {
 	@FindBy(id = "showLists")
 	private WebElement showListsSection;
 
-	public ReadToDos(WebDriver driver) {
+	public Read(WebDriver driver) {
 
 	}
 

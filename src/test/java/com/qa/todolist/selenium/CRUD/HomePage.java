@@ -14,7 +14,7 @@ public class HomePage {
 	
 	public CreateList createList;
 	public CreateEntry createEntry;
-	public ReadToDos read;
+	public Read read;
 	public UpdateEntry updateEntry;
 	public UpdateList updateList;
 	public Delete delete;
@@ -23,7 +23,7 @@ public class HomePage {
 	public HomePage(WebDriver driver) {
 		this.createList = PageFactory.initElements(driver, CreateList.class);
 		this.createEntry = PageFactory.initElements(driver, CreateEntry.class);
-		this.read = PageFactory.initElements(driver, ReadToDos.class);
+		this.read = PageFactory.initElements(driver, Read.class);
 		this.updateEntry = PageFactory.initElements(driver, UpdateEntry.class);
 		this.updateList = PageFactory.initElements(driver, UpdateList.class);
 		this.delete = PageFactory.initElements(driver, Delete.class);
