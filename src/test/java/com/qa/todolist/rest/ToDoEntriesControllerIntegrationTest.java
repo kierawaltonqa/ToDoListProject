@@ -86,6 +86,7 @@ public class ToDoEntriesControllerIntegrationTest {
 
 	@Test
 	public void create() throws Exception {
+		// resources
 		ToDoEntriesDomain contentBody = new ToDoEntriesDomain("complete front end", date1, false, null);
 		ToDoEntriesDTO expectedResult = mapToDTO(contentBody);
 		expectedResult.setId(4L);
