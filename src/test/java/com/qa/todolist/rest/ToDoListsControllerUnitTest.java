@@ -111,4 +111,19 @@ public class ToDoListsControllerUnitTest {
 
 	}
 
+	@Test
+	public void delete() {
+		// resources
+		ResponseEntity<ToDoListsDTO> expectedResult = new ResponseEntity<ToDoListsDTO>(HttpStatus.NO_CONTENT);
+		// rules
+		Mockito.when(this.service.delete(1L)).thenReturn(true);
+		// results
+		ResponseEntity<Boolean> result = this.controller.delete(1L);
+		// assertions
+		Assertions.assertThat(result).isNotNull();
+		Assertions.assertThat(result).isEqualTo(expectedResult);
+
+		Mockito.verify(this.service, Mockito.times(1)).delete(1L);
+	}
+
 }
