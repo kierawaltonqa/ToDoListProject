@@ -54,6 +54,19 @@ html, body {
     margin-top: .3rem;
     margin-bottom: 1rem
 }
-#about {
-    
+#github {
+    font-size: 200%;
 }
+#java {
+    height: 150px;
+    width: 150px;
+}
+#javascript {
+    height: 80px;
+    width: 80px;
+}
+#spring {
+    height: 100px;
+    width: 100px;
+}
+#junit {}
