@@ -14,12 +14,13 @@ public class Read {
 	@FindBy(id = "readListById")
 	private WebElement listIdReadButton;
 
-	@FindBy(id = "readLists")
+	// @FindBy(id = "readLists")
+	@FindBy(xpath = "//*[@id=\"readLists\"]")
 	private WebElement listReadAllButton;
-	
+
 	@FindBy(xpath = "//*[@id=\"showLists\"]/h4[1]")
 	private WebElement startOfList;
-	
+
 	@FindBy(id = "showLists")
 	private WebElement showListsSection;
 
@@ -35,7 +36,7 @@ public class Read {
 	public void readAll() {
 		listReadAllButton.click();
 	}
-	
+
 	public String readAllStatus() {
 		return this.showListsSection.getText();
 	}

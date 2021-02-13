@@ -71,21 +71,21 @@ public class TestPage {
 		// given that I can access the index page
 		driver.get(url);
 		HomePage website = PageFactory.initElements(driver, HomePage.class);
-		// I want to navigate to the crud lists page and read all lists
+		// I want to navigate to the crud lists page and read the lists I created
 		website.navCrudLists();
 		website.read.readAll();
 		// I should be able to view all lists on the database
 		String status = website.read.readAllStatus();
-		String expected = "1: General Tasks";
-		if (status.contains(expected)) {
+		String expected = "General Tasks";
+		if (!status.isBlank()) {
 			test.log(LogStatus.PASS, expected);
 		} else {
 			test.log(LogStatus.FAIL, "Read All Test Failed");
 		}
 		// assertions
 		// Assertions.assertThat(status).isNotNull();
-		assertTrue(status.contains("1: General Tasks"));
-		// assertTrue(status.contains("2: QA Project 2 tasks"));
+		assertTrue(status.contains(expected));
+		assertTrue(status.contains("2: QA Project 2 tasks"));
 	}
 
 	@Test
@@ -157,10 +157,8 @@ public class TestPage {
 		}
 		// assertions
 		assertTrue(status.contains(expected));
-		// NEED TO WORK OUT HOW TO TEST FOR DATE
-		// assertTrue(status.contains("task: expected, complete
-		// by:2021-02-12T00:00:00.000+00:00"));
-		// ALSO COULD/SHOULD HAVE MORE/DIFFERENT ASSERTIONS HERE
+
+		// COULD/SHOULD HAVE MORE/DIFFERENT ASSERTIONS HERE
 	}
 
 	@Test
@@ -198,9 +196,6 @@ public class TestPage {
 		website.navCrudLists();
 		// and I want to update the details of a pre-existing task
 		website.updateEntry.updateTaskEntry("2", "testing for back end updated", "13-02-2021", true, "2");
-		// then I should be able to see the updated task on the screen
-		// String status = website.updateEntry.status();
-		// String expected = "task: testing for back end updated";
 		// then this task should be show when I read for id 2
 		website.read.readById("2");
 		String status2 = website.read.readAllStatus();
@@ -323,11 +318,11 @@ public class TestPage {
 		website.clear.clearUpdateDetailsFromScreen();
 		// then my screen should be cleared
 		String status = website.updateList.status();
+		assertTrue(status.isBlank());
 		if (status.isEmpty()) {
 			test.log(LogStatus.PASS, "Clear Update History Test Passed");
 		} else {
 			test.log(LogStatus.FAIL, "Clear Update History Test Failed");
 		}
-		assertTrue(status.isEmpty());
 	}
 }
