@@ -1,7 +1,7 @@
 Coverage: 93%
 # To Do List Project
 
-This project is a simple to do list application, which users can interact with via a webpage. The goal of this project was to create a full stack OOP-based web application with basic CRUD functionality. The structure of this project resembles a three-thier architecture: the front end (the presentation layer) built using visual studio code and written in Javascript, HTML and CSS; the back end (the business layer) built using Spring and written in Java; and the locally hosted database (the data layer) built using a relational databse language. An API, built in the back end using Spring, is used to act as a messenger between these layers and allow for the interaction, communication and access of data with external software components.
+This project is a simple to do list application, which users can interact with via a webpage. The goal of this project was to create a full stack OOP-based web application with basic CRUD functionality. The structure of this project resembles a three-thier architecture: the front end (the presentation layer) was built using visual studio code and written in Javascript, HTML and CSS; the back end (the business layer) was built using Spring and written in Java; and the locally hosted database (the data layer) was built using a relational databse language. An API, built in the back end using Spring, is used to act as a messenger between these layers and allow for the interaction, communication and access of data with external software components.
 
 ## Getting Started
 
@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 In order to run this application - view the source code and tests, as well as view the web page - you will require a Java runtime environment, as well as the Spring Boot IDE. You will also need to have a version of Maven in order to build the project.
 
-### installing
+### Installing
 
 Steps to follow to get the application running:
 1. fork this repository
