@@ -31,7 +31,7 @@ Unit tests have been used to test aspects of this application. Unit testing is a
 
 ### Integration Tests
 
-Integration testing combines individual units of code and tests them as a group - is used to test the interactions between integrated units of code (it checks that there are no faults in the communications between classes). System integration testing is used in this project; this involves the overall testing of the complete sysytem at hand and it's various individual classes/components.
+Integration testing combines individual units of code and tests them as a group - it is used to test the interactions between integrated units of code (it checks that there are no faults in the communications between classes). System integration testing is used in this project; this involves the overall testing of the complete sysytem at hand and it's various individual classes/components.
 
 ### Selenium Tests
 
