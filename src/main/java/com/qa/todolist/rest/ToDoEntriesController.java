@@ -23,7 +23,7 @@ import com.qa.todolist.services.ToDoEntriesService;
 @RestController
 @RequestMapping("/entries")
 public class ToDoEntriesController {
-	
+
 	private ToDoEntriesService service;
 
 	@Autowired
@@ -31,36 +31,36 @@ public class ToDoEntriesController {
 		super();
 		this.service = service;
 	}
-	
-	//GET - read all
+
+	// GET - read all
 	@GetMapping("/readAll")
 	public ResponseEntity<List<ToDoEntriesDTO>> readAll() {
 		return new ResponseEntity<List<ToDoEntriesDTO>>(this.service.readAll(), HttpStatus.OK);
 	}
-	
+
 	// GET - read by id
 	@GetMapping("/read/{id}")
 	public ResponseEntity<ToDoEntriesDTO> readOne(@PathVariable("id") Long id) {
 		return ResponseEntity.ok(this.service.readOne(id));
 	}
-	
+
 	// POST
 	@PostMapping("/create")
 	public ResponseEntity<ToDoEntriesDTO> create(@RequestBody ToDoEntriesDomain entry) {
 		return new ResponseEntity<ToDoEntriesDTO>(this.service.create(entry), HttpStatus.CREATED);
 	}
-	
-	//PUT
+
+	// PUT
 	@PutMapping("/update/{id}")
 	public ResponseEntity<ToDoEntriesDTO> update(@PathVariable Long id, @RequestBody ToDoEntriesDomain entry) {
 		return new ResponseEntity<ToDoEntriesDTO>(this.service.update(id, entry), HttpStatus.ACCEPTED);
 	}
-	
-	//DELETE
+
+	// DELETE
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Object> delete(@PathVariable Long id) {
 		return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
 }
