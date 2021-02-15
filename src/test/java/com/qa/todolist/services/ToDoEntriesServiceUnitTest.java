@@ -34,22 +34,35 @@ public class ToDoEntriesServiceUnitTest {
 	@Test
 	public void readAll() {
 		// resources
-//		Date date = new Date(2021 - 02 - 07);
-//		Date date2 = new Date(2021 - 03 - 07);
-//		List<ToDoEntriesDomain> test_list = new ArrayList<>();
-//		List<ToDoEntriesDTO> test_dto = new ArrayList<>();
-//		ToDoEntriesDomain test_entry1 = new ToDoEntriesDomain(1L, "task 1", date, null);
-//		ToDoEntriesDomain test_entry2 = new ToDoEntriesDomain(2L, "task 2", date2, null);
-//		test_list.add(test_entry1);
-//		test_list.add(test_entry2);
-//		ToDoEntriesDTO test_dto1 = this.mockedMapper.map(test_entry1, ToDoEntriesDTO.class);
-//		ToDoEntriesDTO test_dto2 = this.mockedMapper.map(test_entry2, ToDoEntriesDTO.class);
-//		test_dto.add(test_dto1);
-//		test_dto.add(test_dto2);
-//		//rules
-//		Mockito.when(this.mockedRepo.findAll()).thenReturn(test_list);
-//		Mockito.when(this.mockedMapper.map(test_list, ToDoEntriesDTO.class)).thenReturn();
+		Date date = new Date(2021 - 02 - 07);
+		Date date2 = new Date(2021 - 03 - 07);
+		List<ToDoEntriesDomain> test_list = new ArrayList<>();
+		List<ToDoEntriesDTO> test_dto = new ArrayList<>();
+		ToDoEntriesDomain test_entry1 = new ToDoEntriesDomain(1L, "task 1", date, true, null);
+		ToDoEntriesDomain test_entry2 = new ToDoEntriesDomain(2L, "task 2", date2, true, null);
+		test_list.add(test_entry1);
+		test_list.add(test_entry2);
+		ToDoEntriesDTO test_dto1 = new ToDoEntriesDTO(1L, "task 1", date, true);
+		ToDoEntriesDTO test_dto2 = new ToDoEntriesDTO(2L, "task 2", date2, true);
+		test_dto.add(test_dto1);
+		test_dto.add(test_dto2);
+
+		// rules
+		Mockito.when(this.mockedMapper.map(test_entry1, ToDoEntriesDTO.class)).thenReturn(test_dto1);
+		Mockito.when(this.mockedMapper.map(test_entry2, ToDoEntriesDTO.class)).thenReturn(test_dto2);
+		Mockito.when(this.mockedRepo.findAll()).thenReturn(test_list);
+
 		// actions
+		List<ToDoEntriesDTO> result = this.service.readAll();
+
+		// assertions
+		Assertions.assertThat(result).isNotNull();
+		Assertions.assertThat(result).isEqualTo(test_dto);
+		Assertions.assertThat(result).usingRecursiveComparison().isEqualTo(test_dto);
+
+		Mockito.verify(this.mockedRepo, Mockito.times(1)).findAll();
+		Mockito.verify(this.mockedMapper, Mockito.times(1)).map(test_entry1, ToDoEntriesDTO.class);
+		Mockito.verify(this.mockedMapper, Mockito.times(1)).map(test_entry2, ToDoEntriesDTO.class);
 
 	}
 
@@ -107,7 +120,7 @@ public class ToDoEntriesServiceUnitTest {
 
 		Mockito.verify(this.mockedMapper, Mockito.times(1)).map(updated_entry, ToDoEntriesDTO.class);
 		Mockito.verify(this.mockedRepo, Mockito.times(1)).save(Mockito.any(ToDoEntriesDomain.class));
-	} 
+	}
 
 	@Test
 	public void delete() {

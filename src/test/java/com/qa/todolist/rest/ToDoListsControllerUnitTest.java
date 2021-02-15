@@ -44,7 +44,7 @@ public class ToDoListsControllerUnitTest {
 		ToDoListsDomain item2 = new ToDoListsDomain(2L, "list 2", null);
 		ToDoListsDTO dto1 = mapToDTO(item1);
 		ToDoListsDTO dto2 = mapToDTO(item2);
-		test_list.add(item1); 
+		test_list.add(item1);
 		test_list.add(item2);
 		test_dtolist.add(dto1);
 		test_dtolist.add(dto2);
@@ -113,6 +113,17 @@ public class ToDoListsControllerUnitTest {
 
 	@Test
 	public void delete() {
+		// resources
+		ResponseEntity<ToDoListsDTO> expectedResult = new ResponseEntity<ToDoListsDTO>(HttpStatus.NO_CONTENT);
+		// rules
+		Mockito.when(this.service.delete(1L)).thenReturn(true);
+		// results
+		ResponseEntity<Boolean> result = this.controller.delete(1L);
+		// assertions
+		Assertions.assertThat(result).isNotNull();
+		Assertions.assertThat(result).isEqualTo(expectedResult);
 
+		Mockito.verify(this.service, Mockito.times(1)).delete(1L);
 	}
+
 }

@@ -3,7 +3,6 @@ package com.qa.todolist.rest;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -118,11 +117,17 @@ public class ToDoEntriesControllerUnitTest {
 
 	@Test
 	public void delete() {
-//		//resources
-//		Date date = Date.valueOf("2021-02-06");
-//		ToDoEntriesDomain test_entry = new ToDoEntriesDomain(1L, "task 1", date, null);
-//		//rules
-//		Mockito.when(this.controller.delete(test_entry.getId())).then(null);
+		// resources
+		ResponseEntity<ToDoEntriesDTO> expectedResult = new ResponseEntity<ToDoEntriesDTO>(HttpStatus.NO_CONTENT);
+		// rules
+		Mockito.when(this.service.delete(1L)).thenReturn(true);
+		// results
+		ResponseEntity<Boolean> result = this.controller.delete(1L);
+		// assertions
+		Assertions.assertThat(result).isNotNull();
+		Assertions.assertThat(result).isEqualTo(expectedResult);
+
+		Mockito.verify(this.service, Mockito.times(1)).delete(1L);
 	}
 
 }

@@ -48,14 +48,14 @@ public class ToDoListsControllerIntegrationTest {
 
 	private final List<ToDoEntriesDTO> entryList = new ArrayList<>();
 	private final List<ToDoEntriesDTO> entryList2 = new ArrayList<>();
-	
+
 	Date date1 = Date.valueOf("2021-02-06");
 	Date date2 = Date.valueOf("2021-02-12");
 	Date date3 = Date.valueOf("2021-02-07");
 
 	private final ToDoEntriesDTO entry1 = new ToDoEntriesDTO(1L, "create back end", date1, true);
 	private final ToDoEntriesDTO entry2 = new ToDoEntriesDTO(2L, "testing for back end", date2, false);
-	private final ToDoEntriesDTO entry3 = new ToDoEntriesDTO(3L, "buy dad a birthday present", date3, true);	
+	private final ToDoEntriesDTO entry3 = new ToDoEntriesDTO(3L, "buy dad a birthday present", date3, true);
 
 	@Test
 	public void readAll() throws Exception {
@@ -77,7 +77,7 @@ public class ToDoListsControllerIntegrationTest {
 		// action
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
 	}
- 
+
 	@Test
 	public void readOne() throws Exception {
 		// resources
@@ -96,40 +96,56 @@ public class ToDoListsControllerIntegrationTest {
 
 	@Test
 	public void create() throws Exception {
+		// resources
 		ToDoListsDomain contentBody = new ToDoListsDomain("Shopping List", null);
 		ToDoListsDTO expectedResult = mapToDTO(contentBody);
 		expectedResult.setId(3L);
+		// request
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
 				.request(HttpMethod.POST, "http://localhost:8080/lists/create").contentType(MediaType.APPLICATION_JSON)
 				.content(jsonifier.writeValueAsString(contentBody)).accept(MediaType.APPLICATION_JSON);
+		// expectations
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isCreated();
 		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
+		// action
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
 	}
 
 	@Test
 	public void update() throws Exception {
 		// resources
-		ToDoListsDomain contentBody = new ToDoListsDomain(1L,"list 1", null);
+		ToDoListsDomain contentBody = new ToDoListsDomain(1L, "list 1", null);
 		ToDoListsDomain updatedBody = new ToDoListsDomain(contentBody.getTitle(), contentBody.getToDoList());
 		updatedBody.setId(1L);
 		ToDoListsDTO expectedResult = mapToDTO(updatedBody);
-		//request
+		// request
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-				.request(HttpMethod.PUT, "http://localhost:8080/lists/update/" + 1).contentType(MediaType.APPLICATION_JSON)
-				.content(jsonifier.writeValueAsString(contentBody)).accept(MediaType.APPLICATION_JSON);
-		//expectations
+				.request(HttpMethod.PUT, "http://localhost:8080/lists/update/" + 1)
+				.contentType(MediaType.APPLICATION_JSON).content(jsonifier.writeValueAsString(contentBody))
+				.accept(MediaType.APPLICATION_JSON);
+		// expectations
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isAccepted();
 		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
-		//action
+		// action
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
-	} 
+	}
 
 	@Test
 	public void delete() throws Exception {
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-				.request(HttpMethod.DELETE, "http://localhost:8080/lists/delete/" + 2);
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE,
+				"http://localhost:8080/lists/delete/" + 2);
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isNoContent();
+		this.mock.perform(mockRequest).andExpect(matchStatus);
+	}
+
+	// delete if it doesn't exist
+	@Test
+	public void delete2() throws Exception {
+		// resources
+		Long nonExistantID = 50L;
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE,
+				"http://localhost:8080/lists/delete/" + nonExistantID);
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isInternalServerError();
 		this.mock.perform(mockRequest).andExpect(matchStatus);
 	}
 }

@@ -84,8 +84,14 @@ public class ToDoEntriesControllerIntegrationTest {
 
 	}
 
+	// NOTE: action lines of create and update are hashed out: methods do not work
+	// due to problem with date-time creation values - logic is correct and methods
+	// work almost completely aside from addition of time value onto the end of
+	// date, making an assertion error similar to: "date + time" != "date"
+
 	@Test
 	public void create() throws Exception {
+		// resources
 		ToDoEntriesDomain contentBody = new ToDoEntriesDomain("complete front end", date1, false, null);
 		ToDoEntriesDTO expectedResult = mapToDTO(contentBody);
 		expectedResult.setId(4L);
@@ -94,8 +100,11 @@ public class ToDoEntriesControllerIntegrationTest {
 				.request(HttpMethod.POST, "http://localhost:8080/entries/create")
 				.contentType(MediaType.APPLICATION_JSON).content(jsonifier.writeValueAsString(contentBody))
 				.accept(MediaType.APPLICATION_JSON);
+
+		// expectations
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isCreated();
 		ResultMatcher matchContent = MockMvcResultMatchers.content().json(jsonifier.writeValueAsString(expectedResult));
+		// actions
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
 	}
 
@@ -124,6 +133,17 @@ public class ToDoEntriesControllerIntegrationTest {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE,
 				"http://localhost:8080/entries/delete/" + 2);
 		ResultMatcher matchStatus = MockMvcResultMatchers.status().isNoContent();
+		this.mock.perform(mockRequest).andExpect(matchStatus);
+	}
+
+	// delete if it doesn't exist
+	@Test
+	public void delete2() throws Exception {
+		// resources
+		Long nonExistantID = 50L;
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE,
+				"http://localhost:8080/entries/delete/" + nonExistantID);
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isInternalServerError();
 		this.mock.perform(mockRequest).andExpect(matchStatus);
 	}
 }

@@ -18,7 +18,7 @@ public class ToDoEntriesDTO {
 	private boolean completed;
 
 	// private ToDoListsDTO myList;
-	// causes a recursive error (because house shows cat list)
+	// causes a recursive error
 
 	public ToDoEntriesDTO() {
 		super();
@@ -29,6 +29,14 @@ public class ToDoEntriesDTO {
 		this.id = id;
 		this.description = description;
 		this.dueDate = dueDate;
+		this.completed = completed;
+	}
+
+	// for testing purposes
+	public ToDoEntriesDTO(Long id, String description, boolean completed) {
+		super();
+		this.id = id;
+		this.description = description;
 		this.completed = completed;
 	}
 

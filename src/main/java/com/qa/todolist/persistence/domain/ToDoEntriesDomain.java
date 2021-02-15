@@ -27,6 +27,8 @@ public class ToDoEntriesDomain {
 	@Temporal(TemporalType.DATE)
 	private java.util.Date dueDate;
 
+//	private String dueDate2;
+
 	private boolean completed;
 
 	@ManyToOne
@@ -46,7 +48,7 @@ public class ToDoEntriesDomain {
 		this.completed = completed;
 		this.myList = myList;
 	}
- 
+
 	// constructor without id (for testing purposes)
 	public ToDoEntriesDomain(String description, Date dueDate, boolean completed, ToDoListsDomain myList) {
 		super();
@@ -96,5 +98,4 @@ public class ToDoEntriesDomain {
 		this.myList = myList;
 	}
 
-	
 }

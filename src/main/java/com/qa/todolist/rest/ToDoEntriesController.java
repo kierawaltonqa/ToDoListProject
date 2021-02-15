@@ -58,7 +58,7 @@ public class ToDoEntriesController {
 
 	// DELETE
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Object> delete(@PathVariable Long id) {
+	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 		return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.qa.todolist.persistence.domain.ToDoEntriesDomain;
@@ -57,9 +58,16 @@ public class ToDoEntriesService {
 
 	// DELETE - delete
 	public boolean delete(Long id) {
-		this.repo.deleteById(id);
-		boolean exists = this.repo.existsById(id);
-		return !exists;
-	}
 
+		try {
+			this.repo.deleteById(id);
+			boolean exists = this.repo.existsById(id);
+
+			return !exists;
+
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
