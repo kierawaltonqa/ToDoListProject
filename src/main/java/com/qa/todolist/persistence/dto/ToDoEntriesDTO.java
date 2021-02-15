@@ -18,7 +18,7 @@ public class ToDoEntriesDTO {
 	private boolean completed;
 
 	// private ToDoListsDTO myList;
-	// causes a recursive error (because house shows cat list)
+	// causes a recursive error
 
 	public ToDoEntriesDTO() {
 		super();
