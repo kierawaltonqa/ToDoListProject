@@ -17,9 +17,6 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-	<!-- war file -->
-	<packaging>war</packaging>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
