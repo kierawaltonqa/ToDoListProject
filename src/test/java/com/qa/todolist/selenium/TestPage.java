@@ -198,7 +198,6 @@ public class TestPage {
 		website.read.readById("2");
 		String status2 = website.read.readAllStatus();
 		String expected2 = "testing for back end updated";
-		// complete by: 2021-03-03T00:00:00.000+00:00
 		if (status2.contains(expected2)) {
 			test.log(LogStatus.PASS, expected2);
 		} else {
