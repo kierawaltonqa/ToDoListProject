@@ -52,7 +52,7 @@ Deployment of this project has been managed through the use of a CI pipeline. Ba
 * [Mockito](https://site.mockito.org/) - Testing
 * [Selenium](https://www.selenium.dev/) - Automated Testing
 * [SonarQube](https://www.sonarqube.org/) - Static Analysis Tool
-* [Jira](https://team-1607440641058.atlassian.net/plugins/servlet/project-config/IMS/permissions) - Project Management (this is a link to my Jira kanban board for this project)
+* [Jira](https://team-1607440641058.atlassian.net/secure/RapidBoard.jspa?projectKey=TDLP&rapidView=4) - Project Management (this is a link to my Jira kanban board for this project)
 * [Postman](https://www.postman.com/) - Assisted API development
 
 ## Versioning
@@ -67,6 +67,8 @@ Deployment of this project has been managed through the use of a CI pipeline. Ba
 ## Licence
 
 This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) file for details.
+[BootStrap](https://github.com/twbs/bootstrap/blob/v4.0.0/LICENSE)
+
 
 ## Acknowledgements
 
