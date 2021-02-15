@@ -66,8 +66,8 @@ Deployment of this project has been managed through the use of a CI pipeline. Ba
 
 ## Licence
 
-This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) file for details.
-[BootStrap](https://github.com/twbs/bootstrap/blob/v4.0.0/LICENSE)
+*This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) file for details.
+*[BootStrap](https://github.com/twbs/bootstrap/blob/v4.0.0/LICENSE) - Bootstrap License
 
 
 ## Acknowledgements
