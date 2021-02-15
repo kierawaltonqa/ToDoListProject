@@ -1,4 +1,4 @@
-package com.qa.todolist.selenium.CRUD;
+package com.qa.todolist.selenium;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

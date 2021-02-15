@@ -81,12 +81,12 @@ const createTask = () => {
         .then(response => response.json())
         .then(info => {
             console.log(info);
-            printTasks(`task: ${info.description}, complete by: ${info.dueDate}`);
+            printTasks(`task added: ${info.description}`);
         })
         .catch(err => console.error('ERROR!' + err));
 }
 
-//event listeners
+//event listeners 
 createListButton.addEventListener("click", createList);
 addTaskButton.addEventListener("click", createTask);
 finishedButton.addEventListener("click", clearDetails);

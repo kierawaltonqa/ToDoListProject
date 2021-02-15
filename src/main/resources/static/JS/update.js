@@ -90,7 +90,7 @@ const updateTask = () => {
     }).then(response => response.json())
         .then(info => {
             console.log(info);
-            printNewTask(`task: ${info.description}, complete by: ${info.dueDate}`);
+            printNewTask(`task updated: ${info.description}`);
         })
         .catch(err => console.error('ERROR!' + err));
 }

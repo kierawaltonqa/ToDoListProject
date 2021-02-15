@@ -1,4 +1,4 @@
-package com.qa.todolist.selenium.CRUD;
+package com.qa.todolist.selenium;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -63,7 +63,7 @@ public class TestPage {
 		report.close();
 	}
 
-//NOT WORKING - CAN'T FIGURE OUT WHY??
+//NOT WORKING - CAN'T FIGURE OUT WHY - WORKED ONCE BUT HAS STOPPED WORKING?
 //	@Test
 //	public void readAll() {
 //		// set up extent report
@@ -157,8 +157,6 @@ public class TestPage {
 		}
 		// assertions
 		assertTrue(status.contains(expected));
-
-		// COULD/SHOULD HAVE MORE/DIFFERENT ASSERTIONS HERE
 	}
 
 	@Test
