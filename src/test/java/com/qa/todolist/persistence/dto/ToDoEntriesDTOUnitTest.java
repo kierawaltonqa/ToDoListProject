@@ -96,4 +96,17 @@ public class ToDoEntriesDTOUnitTest {
 	public void trueCompleted() {
 		Assertions.assertThat(entry.isCompleted()).isTrue();
 	}
+
+	@Test
+	public void nullDueDate() {
+		entry.setDueDate(null);
+		Assertions.assertThat(entry.getDueDate()).isNull();
+	}
+
+	@Test
+	public void nullDueDate2() {
+		other.setDueDate(null);
+		Assertions.assertThat(other.getDueDate()).isNotEqualTo(other2.getDueDate());
+	}
+
 }

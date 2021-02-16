@@ -32,14 +32,6 @@ public class ToDoEntriesDTO {
 		this.completed = completed;
 	}
 
-	// for testing purposes
-	public ToDoEntriesDTO(Long id, String description, boolean completed) {
-		super();
-		this.id = id;
-		this.description = description;
-		this.completed = completed;
-	}
-
 	public Long getId() {
 		return id;
 	}

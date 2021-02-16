@@ -1,4 +1,4 @@
-Coverage: 94%
+Coverage: 96%
 # To Do List Project
 
 This project is a simple to do list application, which users can interact with via a webpage. The goal of this project was to create a full stack OOP-based web application with basic CRUD functionality. The structure of this project resembles a three-thier architecture: the front end (the presentation layer) was built using visual studio code and written in Javascript, HTML and CSS; the back end (the business layer) was built using Spring and written in Java; and the locally hosted database (the data layer) was built using a relational databse language. An API, built in the back end using Spring, is used to act as a messenger between these layers and allow for the interaction, communication and access of data with external software components.
